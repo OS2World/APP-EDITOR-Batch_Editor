@@ -1,0 +1,32 @@
+Oggetto:
+batched.exe ver. 0.45 bug
+Da:
+Theo Tromp <theo.tromp@zonnet.nl>
+Data:
+Sat, 05 Jul 2008 18:32:04 +0200
+A:
+acantatore@tin.it
+
+Hallo
+I found a BUG in Batched englis verion 0.45 for OS/2 eCS
+
+Bug
+I will make:
+ASSIST >ASSISTENT
+It make:
+ASSIST >ASSISTENTENTENT
+If i try:
+ASSISTENTENTENT >ASSISTENT
+It make:
+ASSISTENTENTENTENTENT
+
+
+
+Thanks for the Batcheditor
+
+Groeten Theo Tromp
+The NEDERLANDS
+
+
+
+

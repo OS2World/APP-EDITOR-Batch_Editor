@@ -1,0 +1,147 @@
+FORMATO FILE IMPORTAZIONE:
+
+commenti:         sono introdotti da ;
+
+sezioni:          sono ammesse solo le sezioni FILE e TEXT
+
+caratteri speciali:
+
+tab:              a inizio riga 2 tab consecutive introducono sezione
+                  in mezzo a riga viene usato come separatore tra
+                  stringa da sostituire e nuova stringa
+
+specifica nome file:
+
+                  [opzioni].tab.<nomefile>
+                  l'unica opzione valida Š 'R' (ricorsivamente)
+                  esempio :
+                  R	d:\sources\*.c
+
+specifica sostituzione testo:
+
+                  [opzioni].tab.<stringaDaSostituire>.tab.<nuovaStringa>
+                  opzioni valide sono:
+                  I     case insensitive
+                  E     escape sequence
+                  esempio :
+                  IE	alfa\n	beta\r\n
+                  EI	GAMMA\n	DELTA\r\n
+                  E	\tics	\tx
+                  	enne	n
+
+esempio file:
+
+; questo Š un commento
+
+		FILE
+
+
+
+regole:
+
+- le righe che non iniziano con "-" sono ignorate
+
+- all'inizio del file ci deve essere la firma BEPT
+
+- l'elenco dei file viene introdotto dalla stringa "->FILES"
+
+- i nomi dei file devono essere elencati uno per riga
+
+- il formato del nome del file Š:
+  -R:<filename>;
+  dove:
+  -            indica di interpretare la riga come un comando
+  R            (oppure r) Š l'opzione di ricerca ricorsiva.
+  :            separa l'opzione dal nome del file
+  <filename>   Š il nome del file da ricercare
+  ;            fornisce un'indicazione visiva del termine del nome del
+               file (nel caso contenga spazi finali).
+  esempio:
+   (vale solo per il file D:\CONFIG.SYS)
+   -:D:\CONFIG.SYS;
+   (vale per tutti i file con estensione CMD presenti nell'unit… F)
+  -R:F:\*.CMD;
+
+- l'elenco delle stringhe viene introdotto dalla stringa "->STRINGS"
+
+- si deve specificare su una riga la stringa da trovare e sulla
+  successiva quella da sostituire. Se una stringa da trovare non
+  Š preceduta da una stringa da sostituire viene ignorata. Lo
+  stesso vale per la stringa da sostituire se non Š preceduta
+  da quella da ignorare.
+
+- il formato della stringa da trovare Š:
+  -Fi\:<findstring>;
+  dove:
+  -            indica di interpretare la riga come un comando
+  F            (oppure "f") indica il comando di ricerca
+  i            (oppure "I") indica che la ricerca deve avvenire
+               indipendentemente se i caratteri sono maiuscoli o
+               minuscoli.
+  \            indica se, nella stringa che segue e in quella di
+               sostituzione, si deve interpretare il carattere "\"
+               come un carattere di escape
+  :            separa le opzioni dalla stringa da ricercare
+  <findstring> Š la stringa da ricercare
+  ;            fornisce un'indicazione del termine della stringa
+               (utile nel caso contenga spazi finali)
+  esempio:
+  -fi:copy;
+               trova tutte le ricorrenze della stringa "copy"
+               indipendentemente dal fatto che i caratteri siano
+               maiuscoli o minuscoli (quindi vale anche "Copy", "COPY", ecc.)
+  -f\:;\r\n;
+               interpreta le sequenze di escape nella stringa ";\r\n",
+               cioŠ trova tutte le coppie di caratteri ritorno-a-capo,
+               nuova-linea precedute dal carattere ";"
+
+- il formato della stringa da sostituire Š:
+  -S:<newstring>;
+  dove:
+  -            indica di interpretare la riga come un comando
+  S            (oppure "s") indica il comando di sostituzione
+  :            separa il comando dalla stringa da sostituire
+  <newstring>  Š la stringa che verr… sostituita a quella trovata.
+               Se si vuole semplicemente cancellare le stringhe
+               trovate, scrivere semplicemente "-S:;"
+  ;            fornisce un'indicazione del termine della stringa
+               (utile nel caso contenga spazi finali)
+
+
+Esempio di profilo di editazione di testo
+
+------------------8<--------------------
+BEPT
+la riga precedente rappresenta la "firma" del file
+
+ questa riga, le 2 precedenti e la successiva vengono considerate commenti
+
+->Files
+la riga precedente introduce la lista dei file, questa Š un commento valido
+-:d:\config.sys;
+-:d:\os2\os2.ini;
+-:d:\os2\os2sys.ini;
+-R:f:\*.ini;
+ la riga precendente indica di trovare tutti i file con estensione INI
+ che si trovano nell'unit… F:
+
+->Strings
+ la riga precedente introduce la lista delle stringhe
+-f:e:;
+-s:f:;
+-fn:copy;
+ il programma riporter… un errore perch‚ la riga precedente Š errata
+ in quanto "n" non Š un'opzione valida. Il corrispondente comando "-s"
+ verr… ignorato
+-s:copia;
+-s:incolla;
+ il programma riporter… un errore perch‚ il comando "-s" non Š preceduto
+ dal corrispondente "-f".
+-fi:cut;
+-s:;
+ la riga precedente indica di cancellare tutte le occorrenze della
+ stringa cut indipendentemente dal fatto che siano maiuscole o minuscole
+-fi\:;
+ se non Š specificata la stringa da ricercare viene ignorato sia questo
+ comando che il successivo di sostituzione
+------------------8<--------------------

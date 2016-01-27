@@ -1,0 +1,363 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<meta name="Author" content="Alessandro Cantatore">
+<meta name="Translator" content="Guillaume Gay">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#0000ff" vlink="#800080" alink="#ff0000">
+<br>
+<table width="100%" bgcolor="#e0e0ff" cellpadding=4 cellspacing=0 border=0>
+<tr><td>[13 Mai 2004]</td>
+<td align=right><a href="http://xoomer.virgilio.it/acantato">Site WWW d'ACSoft</a>
+</td></tr></table>
+<center>
+<br>
+<h1>Batch Editor version 0.45 Beta</h1>
+</center>
+<p><center><img border="0" src="be0.gif" width="70" height="70" alt="[Logo de l'application]"></center></p>
+<p>&nbsp;</p>
+<ul>
+<li><a href="#0000">Accord de licence</a></li>
+<li><a href="#0001">Introduction</a></li>
+<li><a href="#new">Quoi de neuf dans cette version&nbsp;? </a></li>
+<li><a href="#new2">Les nouveaut&eacute;s des pr&eacute;c&eacute;dentes versions</a></li>
+<li><a href="#0003">Installation</a></li>
+<li><a href="#0004">Fonctionnalit&eacute;s et param&egrave;tres</a></li>
+<li><a href="#0006">Fonctionnalit&eacute;s pr&eacute;vues dans l'avenir</a></li>
+<li><a href="#0007">Enregistrement</a></li>
+</ul>
+<p>&nbsp;</p>
+
+<h2><a name="0000">Accord de licence</a></h2>
+<ul>
+<li>En aucun cas l'auteur pourra &ecirc;tre tenu responsable pour quelque
+perte ou dommage que ce soit. </li>
+<li>Vous &ecirc;tes libres d'utiliser cette version du programme sur
+autant de machines que vous voulez. </li>
+<li>Vous &ecirc;tes libres de distribuer le programme, du moment que vous
+fournissiez tous les fichiers de l'archive dans leur
+int&eacute;gralit&eacute; et sans aucune modification. </li>
+<li>Vous n'&ecirc;tes pas autoris&eacute;(e) &agrave; vendre le programme,
+mais vous pouvez demander une somme suffisante servant &agrave; couvrir
+les co&ucirc;ts de distribution du media.</li>
+<li><b>L'usage de ce programme implique l'acceptation des conditions
+&eacute;nonc&eacute;es ci-dessus ! </b></li>
+</ul>
+<p>&nbsp;</p>
+
+<h2><a name="0001">Introduction</a></h2>
+<P>Batch Editor est une petite application PM "multithread&eacute;e"
+permettant de chercher et remplacer une liste de cha&icirc;nes de
+caract&egrave;res dans un ou plusieurs fichiers. <br>
+Vous pouvez l'utiliser pour &eacute;diter des fichiers textes ou
+binaires. <br>
+Pouvant remplacer des r&eacute;f&eacute;rences de chemins dans les
+fichiers syst&egrave;mes et les fichiers INI, vous pouvez l'utiliser pour
+les mettre &agrave; jour lorsque vous d&eacute;placez une application dans
+un chemin diff&eacute;rent. <br>
+Vous pouvez m&ecirc;me l'utiliser sur vos fichiers syst&egrave;me lorsque
+vous
+d&eacute;placez l'installation d'OS/2 vers une unit&eacute;/partition
+diff&eacute;rente, en rempla&ccedil;ant toutes les ocurences de lettre
+d'unit&eacute; de disque. </p>
+<p>&nbsp;</p>
+
+<h2><a name="new">Quoi de neuf dans cette version&nbsp;? </a></h2>
+<ul>
+<li>Correction de bugs divers</li>
+<li>Les labels des champs d'entr&eacute;e <i>Rechercher&nbsp;:&nbsp;</i>&nbsp;
+et <i>Remplacer&nbsp;par&nbsp;:&nbsp;</i>&nbsp; sont &agrave; pr&eacute;sent
+cliquables afin de coller le contenu du presse-papiers dans le champ
+d'entr&eacute;e correspondant</li>
+</ul>
+<p>&nbsp;</p>
+
+<h2><a name="new2">Les nouveaut&eacute;s des pr&eacute;c&eacute;dentes versions</a></h2>
+<ul>
+<li>Correction de bugs divers</li>
+<li>V&eacute;rification de la pertinence de la structure des profils
+d'&eacute;dition</li>
+<li>Optimisation de l'utilisation du clavier</li>
+<li>Les s&eacute;quences d'&eacute;chappement du langage C sont
+autoris&eacute;es comme cha&icirc;ne pour la recherche/remplacement</li>
+<li>La bo&icirc;te de liste de fichiers prend en compte les
+sp&eacute;cificit&eacute;s du WPS (vous pouvez glisser un ou plusieurs
+fichiers depuis un dossier et les d&eacute;poser sur la bo&icirc;te de
+liste)</li>
+<li>Le profil d'&eacute;dition (i.e. la liste des fichiers et des 
+cha&icirc;nes de caract&egrave;res) peut &ecirc;tre sauvegard&eacute;
+&agrave; tout moment</li>
+</ul>
+<p>&nbsp;</p>
+
+<h2><a name="0003">Installation</a></h2>
+<p>Il vous suffit juste de copier dans le r&eacute;pertoire de votre
+choix, les fichiers suivants (ils doivent r&eacute;sider dans le
+m&ecirc;me r&eacute;pertoire)&nbsp;:&nbsp;</p>
+<ul>
+<li>BATCHED.EXE</li>
+<li>AFCBSU00.DLL</li>
+<li>AFCPMU00.DLL</li>
+<li>BATCHED*.HTM (Guides de l'utilisateur)</li>
+<li>BE*.GIF (images utilis&eacute;es par la documentation)<br>
+<li>BE*.PNG (images utilis&eacute;es par la documentation)<br>
+</ul>
+<p>Puis cr&eacute;ez un objet programme (si vous avez Warp v4, vous avez
+juste &agrave; prendre BATCHED.EXE &agrave; la souris, le glisser et le
+d&eacute;poser dans le dossier de votre choix sur le bureau) dont les
+param&egrave;tres seraient&nbsp;:&nbsp;</p>
+<dl>
+<dt><b>Onglet Programme&nbsp;:&nbsp;</b></dt>
+<dd>
+<dl>
+<dt>Chemin/nom de fichier&nbsp;:&nbsp;</dt>
+<dd>BATCHED.EXE incluant le chemin complet vers le fichier</dd>
+<dt>Param&egrave;tres&nbsp;:&nbsp;</dt>
+<dd>%*</dd>
+<dt>R&eacute;pertoire de travail&nbsp;:&nbsp;</dt>
+<dd>Le chemin complet du r&eacute;pertoire d'installation des
+fichiers</dd>
+</dl>
+</dd>
+<dt><b>Onglet Association&nbsp;:&nbsp;</b></dt>
+<dd>
+<dl>
+<dd>Taper <tt>*.BEP</tt> dans le champ <i>Nouveau nom</i>&nbsp; et
+cliquez sur le bouton <i>Ajout&nbsp;&gt;&gt;</i>&nbsp;</dd>
+</dl>
+</dd>
+<dt><b>Onglet Ic&ocirc;ne&nbsp;:&nbsp;</b></dt>
+<dd>
+<dl>
+<dt>Titre&nbsp;:&nbsp;</dt>
+<dd>Batch editor</dd>
+</dl>
+</dd>
+</dl>
+<p>Le programme n'a pas besoin de modifier quoi que ce soit dans le
+fichier CONFIG.SYS et n'&eacute;crit aucune donn&eacute;e dans les
+fichiers .INI.</p>
+<p>&nbsp;</p>
+
+<h2><a name="0004">Fonctionnalit&eacute;s et param&egrave;tres</a></h2>
+<p>Le programme consiste en deux bo&icirc;tes de liste et quelques boutons
+qui sont activ&eacute;s ou d&eacute;sactiv&eacute;s au besoin. </p>
+<p><center><img border="0" src="be_fr1.png" width="840" height="480" alt="[Aperçu de BatchEditor]"></center></p>
+<p>&nbsp;</p>
+
+<h3>Les contr&ocirc;les sur les <i>Fichiers</i>&nbsp;</h3>
+<p>Le but de la bo&icirc;te de liste de gauche,
+"<i>Fichiers&nbsp;:</i>&nbsp;", est de contenir la liste de tous les
+fichiers &agrave; &eacute;diter. <br>
+Les noms de fichiers peuvent inclure des jokers <tt>*</tt> et
+<tt>?</tt>.</p>
+<p>Pour ajouter un nom de fichier &agrave; la liste, vous
+pouvez&nbsp;:&nbsp;
+<ul>
+<li>taper ses nom et chemin complets dans le champ d'entr&eacute;e sous la
+bo&icirc;te de liste "<i>Fichiers&nbsp;:</i>&nbsp;" et cliquer sur le
+bouton "<i>Ajouter</i>&nbsp;",</li>
+<li>s&eacute;lectionner un ou plusieurs fichiers via la bo&icirc;te de
+dialogue qui s'affiche lorsque vous cliquez sur le bouton
+"<i>Rechercher...</i>&nbsp;",</li>
+<li>ou, plus simplement, juste ouvrir un dossier et glisser le ou les
+fichiers &agrave; &eacute;diter et les d&eacute;poser sur la bo&icirc;te
+de liste. </li>
+</ul>
+</p>
+<p>Lorsqu'un fichier le la liste "<i>Fichiers&nbsp;:</i>&nbsp;" est
+s&eacute;lectionn&eacute;, le bouton "<i>Enlever</i>&nbsp;" et la case
+&agrave; cocher "<i>Chercher dans les sous-r&eacute;pertoires</i>&nbsp;"
+sont activ&eacute;s. <br>
+Le bouton "<i>Enlever</i>&nbsp;" supprime le nom de fichier
+s&eacute;lectionn&eacute; de la liste, alors que la case &agrave; cocher
+vous permet de rechercher tous les fichiers correspondants dans les
+sous-r&eacute;pertoires des chemins s&eacute;lectionn&eacute;s dans la
+liste. <br>
+Un double clic sur un nom de fichier le fait passer dans le champ
+d'entr&eacute;e pour &eacute;dition. <br>
+D&egrave;s que du texte est tap&eacute; dans le champ d'entr&eacute;e de
+fichier, le bouton "<i>Ajouter</i>&nbsp;" devient celui par d&eacute;faut
+de mani&egrave;re &agrave; ce que vous n'ayez qu'&agrave; appuyer sur la
+touche <i>Entr&eacute;e</i>&nbsp;, une fois le nom tap&eacute;, pour
+l'ajouter &agrave; la liste. Le champ d'entr&eacute;e de fichier reprend
+ensuite le focus et vous pouvez taper le nom de fichier suivant. Il est
+ainsi ais&eacute; de cr&eacute;er une liste de fichiers juste en la tapant
+au clavier. </p>
+<p>&nbsp;</p>
+
+<h3>Les contr&ocirc;les sur les <i>Cha&icirc;nes</i>&nbsp;</h3>
+<p>Les couples cha&icirc;ne &agrave; chercher et cha&icirc;ne de
+substitution sont affich&eacute;s dans la bo&icirc;te de liste
+"<i>Cha&icirc;nes&nbsp;:</i>&nbsp;" de droite, s&eacute;par&eacute;es par
+une fl&egrave;che <tt>" -&gt; "</tt>. </p>
+<p>Les champs d'entr&eacute;e "<i>Rechercher&nbsp;:</i>&nbsp;" et
+"<i>Remplacer par&nbsp;:</i>&nbsp;" et le bouton "<i>Ajouter</i>&nbsp;"
+permettent d'ajouter un couple de cha&icirc;nes &agrave; la liste. <br>
+Lorsque le champ d'entr&eacute;e "<i>Remplacer:</i>&nbsp;" est vide,
+toutes les cha&icirc;nes trouv&eacute;es sont simplement
+supprim&eacute;es. <br>
+Le bouton "<i>Enlever</i>&nbsp;" et le double clic sur les
+&eacute;l&eacute;ments de la liste fonctionnent comme dans la liste
+"<i>Fichiers&nbsp;:</i>&nbsp;". <br>
+Le bouton "<i>Enlever tout</i>&nbsp;" retire toutes les cha&icirc;nes
+sans aucune sommation. </p>
+<p>Il est ais&eacute; de cr&eacute;er une liste de cha&icirc;nes de
+<i>recherche/remplacement</i>&nbsp; en utilisant juste le clavier. <br>
+Commencez simplement &agrave; taper la cha&icirc;ne dans le champ
+"<i>Rechercher&nbsp;:</i>&nbsp;"&nbsp;: le bouton "<i>Ajouter</i>&nbsp;"
+s'activera. D&egrave;s que vous avez achev&eacute; d'&eacute;crire la
+cha&icirc;ne &agrave; rechercher, vous pouvez appuyer sur la touche
+<i>Entr&eacute;e</i>&nbsp; pour donner le focus au champ
+"<i>Remplacer par&nbsp;:</i>&nbsp;". Vous pouvez alors encha&icirc;ner et
+taper la cha&icirc;ne de substitution pour appuyer sur la touche
+<i>Entr&eacute;e</i>&nbsp; &agrave; la fin ou juste appuyer sur la touche
+<i>Entr&eacute;e</i>&nbsp; si la cha&icirc;ne de substitution est
+vide&nbsp;: la paire de cha&icirc;nes
+<i>recherch&eacute;e/substitution</i>&nbsp; sera ajout&eacute;e &agrave;
+la liste "<i>Cha&icirc;nes&nbsp;:</i>&nbsp;" et le focus portera sur le
+champ "<i>Rechercher&nbsp;:</i>&nbsp;" &agrave; nouveau, vous permettant
+ainsi d'entrer la paire de cha&icirc;nes suivante. </p>
+<p>La case &agrave; cocher "<i>Respecter la casse</i>&nbsp;", si elle est
+activ&eacute;e pour un des &eacute;l&eacute;ments
+s&eacute;lectionn&eacute; dans la liste, vous permettra de faire une
+recherche de la cha&icirc;ne s&eacute;lectionn&eacute;e en respectant la
+casse. </p>
+<p>La case &agrave; cocher "<i>Caract&egrave;res
+d'&eacute;chappement</i>&nbsp;", activable &agrave; la s&eacute;lection
+d'un &eacute;l&eacute;ment, signifie que l'&eacute;l&eacute;ment
+s&eacute;lectionn&eacute; sera interpr&eacute;t&eacute; comme une
+s&eacute;quence de caract&egrave;res d'&eacute;chappement. </p>
+<p><center><img border="0" src="be_fr2.png" width="281" height="64" alt="[Aperçu d'une séquence d'échappement]"></center></p>
+<p>Le caract&egrave;re d'&eacute;chappement est le
+"slash"&nbsp;:&nbsp;<tt>\</tt>. Les s&eacute;quences d'&eacute;chappement
+valides sont&nbsp;:&nbsp;
+<dl compact="">
+<dt><tt>\a</tt></dt>
+<dd>alarme (hexadecimal value: 0x07)</dd>
+<dt><tt>\b</tt></dt>
+<dd>retour arri&egrave;re (valeur hexad&eacute;cimale&nbsp;: 0x08)</dd>
+<dt><tt>\f</tt></dt>
+<dd>saut de page (valeur hexad&eacute;cimale&nbsp;: 0x0c)</dd>
+<dt><tt>\n</tt></dt>
+<dd>nouvelle ligne (valeur hexad&eacute;cimale&nbsp;: 0x0a)</dd>
+<dt><tt>\r</tt></dt>
+<dd>retour chariot (valeur hexad&eacute;cimale&nbsp;: 0x0d)</dd>
+<dt><tt>\t</tt></dt>
+<dd>tabulation horizontale (valeur hexad&eacute;cimale&nbsp;: 0x09)</dd>
+<dt><tt>\v</tt></dt>
+<dd>tabulation verticale (valeur hexad&eacute;cimale&nbsp;: 0x0b)</dd>
+<dt><tt>\'</tt></dt>
+<dd>apostrophe (valeur hexad&eacute;cimale&nbsp;: 0x27)</dd>
+<dt><tt>\"</tt></dt>
+<dd>guillemets (valeur hexad&eacute;cimale&nbsp;: 0x22)</dd>
+<dt><tt>\?</tt></dt>
+<dd>point d'interrogation (valeur hexad&eacute;cimale&nbsp;: 0x3f)</dd>
+<dt><tt>\\</tt></dt>
+<dd>le caract&egrave;re d'&eacute;chappement <tt> \</tt> lui-m&ecirc;me
+(valeur hexad&eacute;cimale&nbsp;: 0x5c)</dd>
+<dt><tt>\xnn</tt></dt>
+<dd>n'importe quel caract&egrave;re selon sa valeur hexad&eacute;cimale</dd>
+</dl>
+</p>
+<p>&nbsp;</p>
+
+<h3>Les autres boutons</h3>
+<p>Une fois les deux listes compl&eacute;t&eacute;es selon vos besoins,
+vous devez cliquer sur le bouton "<i>Lancer</i>&nbsp;" pour
+d&eacute;marrer la proc&eacute;dure d'&eacute;dition. <br>
+Une bo&icirc;te de dialogue de progression vous permettra de surveiller le
+processus. Le bouton "<i>Stop</i>&nbsp;" de cette fen&ecirc;tre
+interrompra la proc&eacute;dure.</p>
+<p>&Agrave; l'aide du bouton "<i>Enregistrer</i>&nbsp;" il est possible de
+sauvegarder les listes de fichiers et cha&icirc;nes en cours avec leurs
+options de recherche et remplacement relatives, dans un fichier binaire
+(profil d'&eacute;dition). </p>
+<p>Le bouton "<i>Charger</i>&nbsp;" permet d'ouvrir un profil
+d'&eacute;dition dans la fen&ecirc;tre en cours. </p>
+<p>Les profils d'&eacute;dition sont sauvegard&eacute;s par d&eacute;faut
+avec l'extension <tt>*.bep</tt>. Pour cette raison, l'association de ce
+genre de fichiers au programme vous permettra, en un double clic sur le
+document, de lancer automatiquement Batch Editor. </p>
+<p><b>Remarques&nbsp;:&nbsp;</b></p>
+<ul>
+<li>Les options <i>Chercher dans les sous-r&eacute;pertoires, Ignorer la
+casse, Caract&egrave;res d'&eacute;chappement</i>&nbsp; ne s'appliquent
+pas &agrave; tous les fichiers ou cha&icirc;nes mais seulement &agrave;
+celles s&eacute;lectionn&eacute;es. </li>
+<li>Les s&eacute;quences d'&eacute;chappement <tt>\'</tt>, <tt>\"</tt>
+et <tt>\?</tt> sont l&agrave; juste pour des raisons de
+compatibilit&eacute; avec le code source C (si vous remplissez le champ
+en collant des cha&icirc;nes provenant d'un fichier de code source en C). 
+<br>
+Vous pouvez taper directement <tt>'</tt>, <tt>"</tt> ou <tt>?</tt>,
+sans les pr&eacute;c&eacute;der de <tt>\</tt> dans une cha&icirc;ne avec
+caract&egrave;res d'&eacute;chappement&nbsp;:&nbsp;ils seront
+interpr&eacute;t&eacute;s correctement&nbsp;!&nbsp;</li>
+<li>Pour sp&eacute;cifier un caract&egrave;re selon sa valeur
+hexad&eacute;cimale, vous devez inclure 2 chiffres hexad&eacute;cimaux,
+sinon il ne sera pas interpr&eacute;t&eacute; correctement. Par exemple,
+des s&eacute;quences valides de ce type sont&nbsp;:&nbsp; <tt>\x09</tt>
+(<tt>\x9</tt> est consid&eacute;r&eacute; comme une erreur), <tt>\x90</tt>,
+<tt>\xff</tt>, etc.. </li>
+<li>La version en cours de Batch Editor n'effectue aucune
+v&eacute;rification sur les cha&icirc;nes ins&eacute;r&eacute;es dans la
+liste. Comme les cha&icirc;nes sont recherch&eacute;es puis
+remplac&eacute;es selon l'ordre d'apparition dans la liste, l'ordre est
+important si la liste de cha&icirc;nes &agrave; rechercher contiennent des
+cha&icirc;nes repr&eacute;sentant des sous-cha&icirc;nes d'autres
+cha&icirc;nes. Pour &eacute;viter des substitutions non
+d&eacute;sir&eacute;es, les sous-cha&icirc;nes doivent &ecirc;tre
+situ&eacute;es sous les cha&icirc;nes. 
+<br>
+Aucune option n'est encore propos&eacute;e pour la recherche de
+<i>mots</i>&nbsp;, i.e. si vous entrez <i>copie</i>&nbsp; comme
+cha&icirc;ne &agrave; rechercher, toutes les occurences <i>copie</i>&nbsp;
+et de mots comprenant <i>copie</i>&nbsp; seront &eacute;dit&eacute;s. Pour
+&eacute;viter la substitution de certains mots, vous devez les substituer
+avec eux-m&ecirc;mes. Par exemple, pour pr&eacute;server toutes les
+occurences de <i>copieFichiers</i>&nbsp; ajoutez simplement les deux
+cha&icirc;nes&nbsp;:&nbsp;
+<br>
+<tt>copieFichiers -&gt; copieFichiers</tt>&nbsp;
+<br>
+<tt>copie -&gt; cha&icirc;ne_quelconque</tt>&nbsp;
+<br>
+dans cet ordre dans la liste. </li>
+<li><b>AVERTISSEMENT&nbsp;:&nbsp;</b>le programme ne fait pas de
+sauvegarde des fichiers &eacute;dit&eacute;s. Vous devez donc le faire
+vous-m&ecirc;me si les fichiers sont d'une quelconque importance. </li>
+</ul>
+<p>&nbsp;</p>
+<h2><a name="0006">Fonctionnalit&eacute;s pr&eacute;vues dans l'avenir</a></h2>
+<ul>
+<li>Meilleure interface avec fen&ecirc;tre et bo&icirc;tes de listes
+redimensionnables. </li>
+<li>Bloc-notes de param&egrave;tres pour personnaliser votre police
+favorite ainsi que d'autres options. </li>
+<li>Barre de statut pour l'aide contextuelle, les erreurs, les
+avertissements et la progression. </li>
+<li>V&eacute;rification de la liste de cha&icirc;nes afin d'&eacute;viter
+les conflits. </li>
+<li>Import de liste de fichiers et de substitution depuis des fichiers
+de type texte. </li>
+<li>Export de listes de fichiers ou de substitution vers des fichiers
+de type texte. </li>
+<li>Substitutions de cha&icirc;nes suivant la syntaxe GREP et EGREP. </li>
+<li>Sauvegarde des fichiers &eacute;dit&eacute;s avec des options pour les
+archiver &agrave; l'aide d'un programme externe. </li>
+<li>Aper&ccedil;u des substitutions avec possibilit&eacute; d'en
+exclure certaines. </li>
+<li>Barre de progression double pour les nombres de fichiers et d'octets
+trait&eacute;s. </li>
+<li>Support de REXX pour en faire un programme plus puissant et le faire
+fonctionner comme un convertisseur de format de fichiers. </li>
+</ul>
+<p>&nbsp;</p>
+<h2><a name="0007">Enregistrement</a></h2>
+<p>En tant que version b&ecirc;ta avec fonctionnalit&eacute;s
+limit&eacute;es, ce programme est compl&egrave;tement gratuit. <br>
+Une version plus compl&egrave;te sera probablement partagicielle.</p> 
+<p>&nbsp;</p>
+</body>
+</html>

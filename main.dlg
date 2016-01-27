@@ -1,0 +1,71 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+
+DLGTEMPLATE DLG_MAIN LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  SZ_MAINTITLE, DLG_MAIN, 0, 0, 416, 180,
+            NOT WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR | FCF_TASKLIST
+    BEGIN
+    // gruppo file
+        LTEXT           SZ_FILE, TXT_FILE, 0, 170, 80, 8, DT_MNEMONIC
+        LISTBOX         LB_FILE, 0, 42, 156, 128,
+                        LS_NOADJUSTPOS | LS_HORZSCROLL
+        ENTRYFIELD      SZ_NULL, EF_FILE, 2, 32, 152, 8, ES_MARGIN
+                        CTLDATA 8, 255, 0, 0
+        PUSHBUTTON      SZ_FIND, BTN_FIND, 0, 14, 52, 14,
+                        WS_GROUP | WS_TABSTOP
+        PUSHBUTTON      SZ_ADD, BTN_ADD0, 52, 14, 52, 14,
+                        NOT WS_TABSTOP | WS_DISABLED
+        PUSHBUTTON      SZ_REMOVE, BTN_REM0, 104, 14, 52, 14,
+                        NOT WS_TABSTOP | WS_DISABLED
+        AUTOCHECKBOX    SZ_RECUR, CHK_RECUR, 2, 2, 152, 10,
+                        WS_DISABLED
+    // gruppo stringhe
+        LTEXT           SZ_STRINGS, TXT_STRINGS, 158, 170, 100, 8, DT_MNEMONIC
+        PUSHBUTTON      "", BTN_MOVEUP, 384, 170, 16, 8, WS_DISABLED |
+                        NOT WS_TABSTOP | BS_NOBORDER | BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00FF0000L
+                        PRESPARAMS PP_FONTNAMESIZE, "15.System VIO"
+        PUSHBUTTON      "", BTN_MOVEDOWN, 400, 170, 16, 8, WS_DISABLED |
+                        NOT WS_TABSTOP | BS_NOBORDER | BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00FF0000L
+                        PRESPARAMS PP_FONTNAMESIZE, "15.System VIO"
+        LISTBOX         LB_STRINGS, 158, 54, 258, 116, LS_NOADJUSTPOS |
+                        LS_HORZSCROLL
+        PUSHBUTTON      SZ_F_IND, BTN_FINDCLP, 160, 44, 56, 8,
+                        NOT WS_TABSTOP | BS_NOBORDER | BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00FF0000L
+        ENTRYFIELD      SZ_NULL, EF_STRFIND, 216, 44, 198, 8,
+                        ES_MARGIN | NOT WS_GROUP
+                        CTLDATA 8, 511, 0, 0
+        PUSHBUTTON      SZ_REPLACE, BTN_REPLACECLP, 160, 32, 56, 8,
+                        NOT WS_TABSTOP | BS_NOBORDER | BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00FF0000L
+        ENTRYFIELD      SZ_NULL, EF_STRREPL, 216, 32, 198, 8,
+                        ES_MARGIN | NOT WS_GROUP
+                        CTLDATA 8, 511, 0, 0
+        PUSHBUTTON      SZ_ADD, BTN_ADD1, 158, 14, 56, 14,
+                        WS_GROUP | WS_TABSTOP | WS_DISABLED
+        PUSHBUTTON      SZ_REMOVE, BTN_REM1, 214, 14, 56, 14,
+                        NOT WS_TABSTOP | WS_DISABLED
+        PUSHBUTTON      SZ_REMOVEALL, BTN_REMALL, 270, 14, 56, 14,
+                        NOT WS_TABSTOP | WS_DISABLED
+        AUTOCHECKBOX    SZ_NOCASE, CHK_NOCASE, 158, 2, 80, 10,
+                        WS_DISABLED
+        AUTOCHECKBOX    SZ_ESCAPE, CHK_ESCAPE, 238, 2, 88, 10,
+                        WS_DISABLED
+    // bottoni ricerca e sostituzione
+        PUSHBUTTON      SZ_LOAD, BTN_LOAD, 328, 14, 44, 14,
+                        WS_GROUP | WS_TABSTOP
+        PUSHBUTTON      SZ_SAVE, BTN_SAVE, 372, 14, 44, 14,
+                        WS_GROUP | WS_TABSTOP | WS_DISABLED
+        PUSHBUTTON      SZ_START, BTN_START, 328, 0, 44, 14,
+                        NOT WS_TABSTOP | WS_DISABLED
+        PUSHBUTTON      SZ_EXIT, BTN_EXIT, 372, 0, 44, 14,
+                        NOT WS_TABSTOP
+    // bottone nascosto per dare focus a entry "Replace"
+        PUSHBUTTON      SZ_NULL, BTN_FOCUSREPL, -100, -100, 0, 0,
+                        NOT WS_TABSTOP
+    END
+END

@@ -1,0 +1,334 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Alessandro Cantatore">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#0000ff" vlink="#800080" alink="#ff0000">
+<br>
+<table width="100%" bgcolor="#e0e0ff" cellpadding=4 cellspacing=0 border=0>
+<tr><td>[2004 May 11]</td>
+<td align=right><a href="http://xoomer.virgilio.it/acantato">ACSoft Homepage</a>
+</td></tr></table>
+<center>
+<br>
+<h1>Batch Editor v. 0.45 Beta</h1>
+</center>
+<center>
+<img border="0" src="be0.gif" width="70" height="70"
+alt="[Application logo]">
+</center>
+<p>
+</p>
+<ul>
+ <li><a href="#0000">Contratto di licenza</a>
+ <li><a href="#0001">Introduzione</a>
+ <li><a href="#new">Cosa c'&egrave; di nuovo in questa versione</a>
+ <li><a href="#new2">Novit&agrave; nella versione precedente</a>
+ <li><a href="#0003">Installazione</a>
+ <li><a href="#0004">Funzioni del programma</a>
+ <li><a href="#0006">Funzioni previste per le versioni future</a>
+ <li><a href="#0007">Registrazione</a>
+</ul>
+<br><br><p><p>
+<HR size=3 width=50%>
+
+<p><br><h2><a name="0000">Contratto di licenza</a></h2>
+<ul>
+<li>
+In nessuno caso l'autore di Batch Editor pu&ograve; essere ritenuto
+responsabile per la perdita di dati o supposti danni derivanti dall'uso
+programma.
+<li>
+Questa versione del programma pu&ograve; essere liberamente installata
+e usata su quante macchine si desidera.
+<li>
+Si pu&ograve; distribuire liberamente il programma a patto che siano
+inclusi tutti i file dell'archivio originale senza alcuna modifica.
+<li>
+Non &egrave; permesso vendere il programma, ma si pu&ograve;
+ricaricare un ammonto ragionevole per coprire il costo della distribuzione.
+<li>
+<b>L'uso del programma implica l'accettazione delle condizioni qui precisate!</b>
+</ul>
+<p><br><h2><a name="0001">Introduzione</a></h2>
+Batch Editor &egrave; una semplice applicazione multithreaded PM
+che permette di trovare e sostituire una serie di stringhe contenute in
+uno o pi&ugrave; file.<br>
+Pu&ograve; essere usato sia per modificare file di testo che
+file binari.<br>
+Per esempio, pu&ograve; essere usato per modificare i riferimenti ai
+percorsi nei file di sistema e nei file INI delle applicazioni,
+in modo che queste funzionino correttamente anche se vengono spostate
+dal percorso orginario.<br>
+Si pu&ograve; perfino usare sui file di sistema, quando si sposta
+una installazione del sistema operativo su un disco o una partizione
+differente, sostituendo opportunamente tutti i riferimenti alle lettere
+delle partizioni.<br>
+
+<p><br><h2><a name="new">Cosa c'&egrave; di nuovo in questa versione</a></h2>
+<ul>
+<li>Diversi bug sono stati corretti.
+<li>Le etichette dei campi di immissione <i>Trova&nbsp;</i> e
+    <i>Sostituisci&nbsp;</i> quando vengono cliccate copiano il contenuto
+    della clipboard nei corrispondenti campi di immissione.
+</ul>
+
+<p><br><h2><a name="new2">Novit&agrave; nella versione precedente</a></h2>
+<ul>
+<li>Diversi bug sono stati corretti.
+<li>Controllo della correttezza della struttura dei profilo di editazione.
+<li>&Egrave; stato facilitato l'uso del programma tramite la tastiera.
+<li>Sono permesse le sequenze di escape del linguaggio C per definire
+caratteri non stampabili nelle stringhe di ricerca/sostituzione.
+<li>La lista dei file &egrave; &egrave; in grado di interagire con la WPS
+(si possono trascinare uno o pi&ugrave; file da una cartella rilasciandoli
+sopra la lista aggiungendoli cos&igrave; ad essa).
+<li>I profili di editazione (cio&egrave; le liste dei file e delle stringhe
+possono essere salvati e caricati quando si vuole.
+</ul>
+
+<p><br><h2><a name="0003">Installazione</a></h2>
+&Egrave; sufficiente copiare in una qualsiasi directory i seguenti file
+(devono risiedere nella medesima directory):
+<ul>
+BATCHED.EXE<br>
+AFCBSU00.DLL<br>
+AFCPMU00.DLL<br>
+BATCHED.HTM (Guida utente)<br>
+BE*.GIF (immagini usate nella guida)<br>
+</ul>
+Create poi un oggetto programma (con warp 4 &egrave; sufficiente
+trascinare l'icona di BATCHED.EXE nella cartella desiderata)
+impostando:
+<dl>
+<dt><b>Pagina Programma:</b></dt>
+<dd>
+   <dl>
+   <dt>Percorso e nome del file:</dt>
+   <dd>BATCHED.EXE incluso il percorso completo in cui si trova il file</dd>
+   <dt>Parametri:</dt>
+   <dd>%*</dd>
+   <dt>Cartella di lavoro:</dt>
+   <dd>Il percorso completo in cui sono stati installati i file</dd>
+</dl>
+</dd>
+<dt><b>Pagina Associazione:</b></dt>
+<dd>
+   <dl>
+   <dd>Scrivete nel campo <i>Nuovo nome:</i>&#160; <tt>*.BEP</tt>
+   e cliccate sul bottone <i>Aggiungere</i>&#160;</dd>
+   </dl>
+</dd>
+<dt><b>Pagina Icona:</b></dt>
+<dd>
+   <dl>
+   <dt>Titolo:</dt>
+   <dd>Batch editor</dd>
+   </dl>
+</dd>
+</dl>
+
+Il programma non richiede alcuna modifica del file CONFIG.SYS e non
+scrive alcun dato in OS2.INI.<br>
+
+<p><br><h2><a name="0004">Funzioni del programma</a></h2>
+Il programma consiste in due listbox e alcuni bottoni che vengono
+abilitati o disabilitati secondo necessit&agrave;
+<br><br>
+<center><img border=0 src="be1.gif" width=557 height=390 alt="[screenshot]"></center>
+<p>
+<br><h3>Controlli dei <i>File</i>&#160;</h3>
+Lo scopo della lista sulla sinistra, <i>File:</i>&#160;, &egrave;
+di elencare tutti i file che si vogliono modificare.<br>
+I nomi dei file possono incudere i caratteri jolly <tt>*</tt>
+e <tt>?</tt>.<br>
+Per aggiungere il nome di un file alla lista si pu&ograve; scrivere il suo
+percorso completo nel campo di immissione sottostante la lista
+<i>Files:</i>&#160; cliccando sul bottone <i>Aggiungi</i>&#160;,
+selezionare uno o pi&ugrave; file attraverso il dialogo che appare
+quando si clicca sul bottone <i>Trova...</i>&#160;, o, ancora pi&ugrave;
+facilmente, si possono trascinare uno o pi&ugrave; file da una
+cartella rilasciandoli sulla lista dei file stessa.<br>
+Quando il nome di un file viene selezionato nella lista <i>File:</i>&#160;
+il bottone <i>Rimuovi</i>&#160; e la casella
+<i>Ricorsivamente nelle subdirectory</i>&#160; vengono abilitati.
+Il bottone <i>Rimuovi</i>&#160; cancella il nome del file selezionato
+dalla lista, mentre la casella <i>Ricorsivamente nelle subdirectory</i>&#160;
+indica che l'operazione di ricerca e sostituzione verr&agrave; eseguita
+attraverso l'intera gerarchia delle cartelle contenute in quella
+correntemente selezionata, per tutti i file rispondenti al nome speficicato.
+<br>
+Un doppio clic sul nome di un file riproduce il nome del file stesso
+nel campo di immissione per permetterne la modifica.<br>
+Non appena del testo viene introdotto nel campo di immissione dei file,
+il bottone <i>Aggiungi</i>&#160; viene reso il bottone di default,
+cos&igrave; &egrave; sufficiente premere il tasto <i>Invio</i>&#160;,
+una volta completato il nome del file, per far s&igrave; che esso venga
+aggiunto alla lista.
+In seguito il focus viene nuovamente trasferito al campo di immissione
+dei file in modo da permettere l'immissione di un nuovo nome.
+Questo accorgimento permette di introdurre una lista di file molto
+comodamente, usando solo la tastiera.
+
+<p><br><h3>Controlli delle <i>Stringhe</i>&#160;</h3>
+Le coppie di stringhe che devono essere ricercate e sostituite
+sono listate nell'elenco sulla destra, <i>Stringhe:</i>&#160;,
+separate da una freccia <tt>&quot; -> &quot;</tt>.<br>
+I campi di immissione <i>Aggiungi</i>&#160; e <i>Sostituisci:</i>&#160;
+e il bottone <i>Aggiungi</i>&#160; permettono di inserire la coppia
+di stringhe trova/sostituisci alla lista.<br>
+Quando il campo <i>Sostituisci:</i>&#160; &egrave; vuoto,
+le stringhe trovate verranno semplicemente cancellate.
+Il bottone <i>Rimuovi</i>&#160; e il doppio clic sugli elementi della
+lista funzionano allo stesso modo che per la lista <i>File:</i>&#160;.<br>
+Il bottone <i>Rimuovi tutto</i>&#160; cancella tutti gli
+elementi della lista senza alcuna richiesta preventiva di conferma.<br>
+&Egrave; molto facile creare una lista di stringhe trova/sostituisci
+usando solo la tastiera.
+&Egrave; sufficiente iniziare ad immettere del testo nel campo
+<i>Trova:</i>&#160;, il bottone <i>Aggiungi</i>&#160;
+verr&agrave; immediatamente abilitato.
+Non appena la stringa <i>Trova:</i>&#160; &egrave; stata completata
+basta premere il tasto <i>Invio</i>&#160; per trasferire il focus
+al campo <i>Sostituisci:</i>&#160;.
+Ora si pu&ograve; immettere la stringa <i>sostituisci</i>&#160;
+e premere nuovamente <i>Invio</i>&#160;, o premere solo <i>Invio</i>&#160;,
+se la nuova stringa &egrave; vuota (cio&egrave; se si vuole cancellare
+la stringa trovata): la coppia di stringhe <i>trova/sostituisci</i>&#160;
+verr&agrave; aggiunta alla lista <i>Stringhe</i>&#160; e il focus
+torner&agrave; nuovamente al campo <i>Trova:</i>&#160; permettendo
+cos&igrave; di introdurre la coppia di stringhe successiva.<br>
+La casella <i>Maiuscolo/minuscolo</i>&#160; viene abilitata non appena
+si seleziona un elemento della lista delle stringhe e permetter&agrave;
+di ricercare la stringa selezionata indipendentemente dal fatto che sia
+composta di caratteri maiuscoli o minuscoli.<br>
+La casella <i>Sequenza escape</i>&#160;, abilitata anch'essa alla selezione
+di un elemento della lista, indica che la stringa selezionata verr&agrave;
+interpretata come una sequenza di caratteri di escape.
+<br><br>
+<center>
+<img border=0 src="be2.gif" width=369 height=58 alt="[escape sequence screenshot]"></center>
+<p>Il carattere di escape &egrave; la barra:<tt> \ </tt>.
+Le sequenze di escape valide sono:
+<dl compact>
+<dt><tt>\a</tt></dt><dd>allarm - segnalazione acustica (valore esadecimale: 0x07)</dd>
+<dt><tt>\b</tt></dt><dd>backspace - cancellazione carattere precedente (valore esadecimale: 0x08)</dd>
+<dt><tt>\f</tt></dt><dd>form feed - avanzamento pagina (valore esadecimale: 0x0c)</dd>
+<dt><tt>\n</tt></dt><dd>new line - nuova riga (valore esadecimale: 0x0a)</dd>
+<dt><tt>\r</tt></dt><dd>return - ritorno a capo (valore esadecimale: 0x0d)</dd>
+<dt><tt>\t</tt></dt><dd>horizontal tab - carattere tabulazione orizzontale (valore esadecimale: 0x09)</dd>
+<dt><tt>\v</tt></dt><dd>vertical tab - carattere tabulazione verticale (valore esadecimale: 0x0b)</dd>
+<dt><tt>\'</tt></dt><dd>single quote - carattere quotazione singolo (valore esadecimale: 0x27)</dd>
+<dt><tt>\"</tt></dt><dd>double quote - carattere quotazione doppio (valore esadecimale: 0x22)</dd>
+<dt><tt>\?</tt></dt><dd>question mark - punto interrogativo (valore esadecimale: 0x3f)</dd>
+<dt><tt>\\</tt></dt><dd>il carattere di escape stesso <tt> \ </tt> (valore esadecimale: 0x5c)</dd>
+<dt><tt>\xnn</tt></dt><dd>qualsiasi carattere definito dal suo valore esadecimale</dd>
+</dl>
+
+<p><br><h3>Gli altri bottoni</h3>
+Compilate le due liste secondo le proprie necessit&agrave;, se deve cliccare
+sul bottone <i>Esegui</i>&#160; per avviare la procedura di ricerca e
+sostituzione.<br>
+Un dialogo di progresso permetter&agrave; di monitorare l'elaborazione.
+Il bottone <i>Interrompi</i>&#160;, in questo dialogo, terminer&agrave;
+immediatamente la procedura prima che venga completata.
+<p>
+Tramite il bottone <i>Salva</i>&#160; &egrave; possibile salvare le
+liste dei file e delle stringhe, con le relative opzioni di sostituzione,
+in un file binario (profilo di editazione).<p>
+Il bottone <i>Carica</i>&#160; carica un profilo di editazione,
+precedentemente salvato, nella finestra corrente.<p>
+I profili di editazione vengono salvati di default con l'estensione
+<tt>*.bep</tt>. Associando i file con tale estensione al programma
+stesso, sar&agrave; sufficiente un doppio clic sul documento per
+avviare Batch editor.
+<p>
+<b>Notes:</b><br>
+<ul>
+<li>Le opzioni (<i>Ricorsivamente nelle subdirectory,
+Maiuscolo/minuscolo, Sequenza escape</i>&#160;)
+non valgono per tutti i file o tutte le stringhe, ma solo per quelle
+selezionate.
+<li>Le sequenze di escape<tt> \' </tt>,<tt> \" </tt>e<tt> \? </tt>sono
+incluse solo per compatibilit&agrave; con il codice sorgente C
+(nel caso si intenda riempire i campi di immissione tramite copia/incolla
+da un file sorgente C).<br>
+Infatti, i caratteri <tt> ' </tt>,<tt> " </tt>or<tt> ? </tt> possono essere
+immessi senza alcuna barra<tt> \ </tt> che li preceda, in una stringa che preveda
+sequenze di escape, in quanto saranno comunque interpretati correttamente.
+<li>Quando si specifica un carattere usando il suo valore esadecimale,
+&egrave; necessario includere due cifre esadecimali, altrimenti non
+sar&agrave; interpretato correttamente. Per esempio, alcune sequenze
+di escape valide, di questo tipo, sono:
+<tt> \x09 </tt>(<tt> \x9 </tt>&egrave; considerato un errore),<tt> \x90 </tt>
+,<tt> \xff </tt>, ecc...
+<li>La versione corrente di Batch Editor non esegue alcun controllo sulle
+stringhe inserite nella lista.
+Essendo la ricerca delle stringhe eseguita nello stesso ordine in cui
+esse appaiono nella lista, tale ordine diventa critico quando la lista
+delle stringhe ricercate contiene stringhe che sono sub-stringhe di
+altre stringhe.
+Per evitare sostituzioni indesiderate, le substringhe dovrebbero essere
+inserite sotto le stringhe che le contengono.<br>
+Al momento non &egrave; prevista alcuna opzione per una ricerca
+basata sulle parole (ovvero su stringhe delimitate da particolari
+caratteri).<br>
+Cio&egrave; se si immette la stringa <i>copia</i>&#160;, come stringa
+da ricercare, tutte le occorrenze di <i>copia</i>&#160; e di altre
+parole che la includano verranno modificate.
+Per evitare la sostituzione di alcune parole &egrave; necessario
+introdurle nella lista con le parole stesse come sostituzione.
+Per esempio, per preservare tutte le occorrenze della parola
+<i>cornucopia</i>&#160; sar&agrave; necessario inserire la coppia di
+stringhe:
+<i>cornucopia -> cornucopia</i>&#160; al di sopra di <i>copia -> ...</i>&#160;
+nella lista delle stringhe trova/sostituisci.
+<li><b>ATTENZIONE:</b> Il programma non salva copie di backup
+dei file in corso di modifica. Dovrete fare tali copie voi stessi, se
+i file sono critici.<br>
+</ul>
+<p>
+<p><br><h2><a name="0006">Funzioni previste per le versioni future</a></h2>
+<ul>
+<li>Migliore interfaccia con finestra e liste ridimensionabili individualmente.
+<li>Blocco impostazioni per memorizzare il carattere preferito e altre
+opzioni.
+<li>Barra di stato per la guida contestuale, messaggi informativi e
+di errore e la barra di progresso.
+<li>Controllo automatico della lista delle stringhe per evitare
+conflitti.
+<li>Importazione dei profili di editazione da file in formato testo.
+<li>Esportazione dei profili di editazione in file in formato testo.
+<li>Sostituzione delle stringhe secondo la sintassi di GREP e EGREP.
+<li>Back up dei file processati con l'opzione di comprimerli tramite
+un programma esterno.
+<li>Anteprima delle sostituzioni, con la possibilit&agrave; di
+escludere alcune sostituzioni.
+<li>Doppia barra di progresso per il numero dei file e per il numero
+dei byte elaborati.
+<li>Supporto REXX per permettere sostituzioni condizionali e trasformare
+il programma in un convertitore di formati universale.
+</ul>
+
+<p><br><h2><a name="0007">Registrazione</a></h2>
+Essendo una versione beta con caratteristiche limitate, questa versione
+&egrave; ancora completamente gratuita.<br>
+Una futura versione pi&ugrave; completa sar&agrave; probabilmente
+shareware.<br>
+<P>
+<CENTER><TABLE CELLSPACING=3 WIDTH="100%" BGCOLOR="#B1B16E">
+<TR><TD>
+<TABLE CELLSPACING=3 WIDTH="100%">
+<TR ALIGN=CENTER>
+<TH ALIGN=CENTER><FONT SIZE=+1>
+<A NAME="top" HREF="http://acsoft.yi.org/index.html">Home Page</A>
+</FONT></TH>
+</TR>
+</TABLE>
+</TD></TR>
+</TABLE></CENTER><br>
+<p>
+<a href ="mailto:alexcant@tin.it">Alessandro Cantatore</a>
+<br><br>
+</body>
+</HTML>

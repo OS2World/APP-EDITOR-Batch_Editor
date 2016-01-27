@@ -1,0 +1,744 @@
+//==========================================================================\
+// util.c: funzioni utilit… blocco x impostazioni tabwin                |
+// BOOL enableBtns(HWND hwnd);
+// BOOL resetStrCtls(HWND hwnd, BOOL fl, BOOL fcase, BOOL fesc);
+// BOOL LoadBedPrf(PAPPDATA pad);
+// BOOL SaveBedPrf(PAPPDATA pad);
+// BOOL WsetWaitPtr(VOID);
+// PFILEDLG fileDlg(HWND hwnd, PSZ pszFile, PSZ pszext, PSZ pszTitle, PSZ pszBtn,
+//                  ULONG fl);
+// ULONG cbFndReplList(HWND hwnd, ULONG citems);
+// ULONG getFndReplData(HWND hwnd, PAPPDATA pad, PFNDREPLLIST pfrl, ULONG citems);
+// VOID getFileListData(HWND hlist, PSZ pfiles, ULONG citems);
+// MRESULT EXPENTRY saveFileProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2);
+// BOOL compilebinfr(PSZ psz, PFRIDATA pfd, PFNDREPLITEM pfri);
+// BOOL chkEscSeq(HWND hlist, ULONG item);
+// PSZ escseq2ch(PSZ pszin, PSZ pszout);
+// LONG psz2hexch(PSZ psz);
+// VOID ab2psz(PSZ pszout, PFNDREPLITEM pfri, PFRIDATA pfd);
+// BOOL fillStrList(HWND hlstr, PSZ pszitem, PBEDFILE pbf);
+// BOOL fillStrListOld(HWND hlstr, PSZ pszitem, PBEDFILE pbf);
+//==========================================================================/
+
+#pragma strings(readonly)
+
+#define INCL_WIN
+#define INCL_DOSMISC
+#define INCL_GPI
+#include <os2.h>
+#include <winutil.h>
+#include <string.h>
+#include <stdlib.h>
+#include <afcbsu00.h>
+#include <afcpmu00.h>
+#include "msgs.h"
+#include "main.h"
+#include "api.h"
+
+
+// prototipi funzioni
+
+BOOL fillStrList(HWND hlstr, PSZ pszitem, PBEDFILE pbf);
+BOOL fillStrListOld(HWND hlstr, PSZ pszitem, PBEDFILE pbf);
+PSZ nextLine(PSZ p);
+
+PSZ nextLine(PSZ psz) {
+   while (*psz) {
+      if (*psz == '\r') {
+         *psz = 0;
+         return (*++psz == '\n')? ++psz : psz;
+      } /* endif */
+      if (*psz == '\n') {
+         *psz = 0;
+         return ++psz;
+      } /* endif */
+      ++psz;
+   } /* endwhile */
+   return psz;
+}
+
+//==========================================================================\
+// abilita/disabilita bottone start e save secondo stato listbox            |
+//==========================================================================/
+
+BOOL enableBtns(HWND hwnd) {
+   ULONG c1, c2;
+   BOOL b1, b2;
+   c1 = DlgLboxQueryItemCount(hwnd, LB_FILE);
+   b1 = c1 && (DlgLboxQuerySelectedItem(hwnd, LB_FILE) >= 0);
+   c2 = DlgLboxQueryItemCount(hwnd, LB_STRINGS);
+   b2 = c2 && (DlgLboxQuerySelectedItem(hwnd, LB_STRINGS) >= 0);
+   return (WinEnableControl(hwnd, BTN_REM0, b1) &&
+           WinEnableControl(hwnd, BTN_REM1, b2) &&
+           WinEnableControl(hwnd, BTN_START, c1 && c2) &&
+           WinEnableControl(hwnd, BTN_SAVE, c1 || c2) &&
+           WinEnableControl(hwnd, BTN_REMALL, c2));
+}
+
+
+//==========================================================================\
+// abilita/disabilita controlli e spunta o meno check box opzioni stringhe  |
+// secondo la selezione della stringa find/replace                          |
+//==========================================================================/
+
+BOOL resetStrCtls(HWND hwnd, BOOL fl, BOOL fcase, BOOL fesc) {
+   BOOL rc = WinEnableControl(hwnd, CHK_NOCASE, fl) &&
+             WinEnableControl(hwnd, CHK_ESCAPE, fl) &&
+             WinEnableControl(hwnd, BTN_REM1, fl);
+   WinCheckButton(hwnd, CHK_NOCASE, (fl && fcase? 1: 0));
+   WinCheckButton(hwnd, CHK_ESCAPE, (fl && fesc? 1: 0));
+   if (fl) WsetDefBtn(hwnd, BTN_REM1);
+   return rc;
+}
+
+
+//==========================================================================\
+// - legge il file in memoria
+// - svuota liste e entry field del contenuto corrente
+// - riempie liste con contenuto profilo editazione
+// - se profilo editazione contiene sia specifiche file che elenco
+//   sostituzioni setta Start come bottone di default
+// - se profilo editazione contiene solo elenco file da il focus a
+//   entryfield find, altrimenti a entryfield file
+//==========================================================================/
+
+BOOL LoadBedPrf(PAPPDATA pad) {
+   PBEDFILE pbf;
+   BOOL fl;
+   SHORT item;
+   PSZ pszerr = NULL;
+   BOOL rc = FALSE;
+   HWND hlfile = WinWindowFromID(pad->hMain, LB_FILE);
+   HWND hlstr = WinWindowFromID(pad->hMain, LB_STRINGS);
+   ULONG cfiles, cstrings;
+   enum {FILES, FILECMD, TEXTOPT, TEXTFIND, TEXTREPL};
+   pad->is.working = 1;
+   WinEnableWindow(pad->hMain, FALSE);
+   if (!(pbf = (PBEDFILE)ioF2psz(pad->achload, NULL)))
+      {pszerr = SZERR_ALLOC; goto end;}
+   // controlla versione file profilo batch editor
+   switch (*((PULONG)pbf)) {
+      case BEDPRFID:
+         pad->is.bever = 0;
+         break;
+      case BEDPRFID1:
+         pad->is.bever = 1;
+         break;
+      case BEDPRFID2:
+         pad->is.bever = 2;    // text file
+         break;
+      default:
+         goto invalidFile;
+   } /* endswitch */
+   cfiles = cstrings = 0;
+   // resetta controlli listbox e entryfield ------------------------------
+   wLboxDelAll(hlfile);
+   WinSetDlgItemText(pad->hMain, EF_FILE, SZ_NULL);
+   wLboxDelAll(hlstr);
+   WinSetDlgItemText(pad->hMain, EF_STRFIND, SZ_NULL);
+   WinSetDlgItemText(pad->hMain, EF_STRREPL, SZ_NULL);
+   // se file testo -------------------------------------------------------
+   if (pad->is.bever == 2) {
+      PSZ p, pline, pecmd, prepl;
+      FRIDATA fd;
+      CHAR buf[1024];
+      INT expected;
+      for (p = (PSZ)pbf + sizeof(ULONG), expected = FILES; *p; ) {
+         if (*p == '-') {
+            ++p;
+            switch (expected) {
+               case FILES:
+                  if (memcmp(p, "FILES:", 6)) goto invalidFile;
+                  expected = FILECMD;
+                  break;
+               case FILECMD:
+                  if ((*p == 'R') || (*p == '-')) {
+                     fl = (*p == 'R');
+                     pline = p + 2;
+                     p = nextLine(pline + 2);
+                     if (NULL == (pecmd = strrchr(pline, '.'))) goto invalidFile;
+                     *pecmd = 0;
+                     item = wLboxInsItem(hlfile, LIT_SORTASCENDING, pline);
+                     if (fl && item >= 0) {
+                        wLboxSetItemHnd(hlfile, item, 1);
+                        cfiles++;
+                     } /* endif */
+                     continue;
+                  } /* endif */
+                  if (memcmp(p, "TEXT:", 5)) goto invalidFile;
+                  expected = TEXTOPT;
+                  break;
+               case TEXTOPT:
+                  if (!memcmp(p, "EI", 2) ||
+                      !memcmp(p, "IE", 2) ||
+                      !memcmp(p, "I\r", 2) ||
+                      !memcmp(p, "E\r", 2) ||
+                      !memcmp(p, "I\n", 2) ||
+                      !memcmp(p, "E\n", 2) ||
+                      (*p == '\r') || (*p == '\n')) {
+                     fd.fri.ins = (NULL != memchr(p, 'I', 2));
+                     fd.fri.esc = (NULL != memchr(p, 'E', 2));
+                     expected = TEXTFIND;
+                  } else {
+                     goto invalidFile;
+                  } /* endif */
+                  break;
+               case TEXTFIND:
+                  pline = p;
+                  p = nextLine(p);
+                  if (NULL == (pecmd = strrchr(pline, '.'))) goto invalidFile;
+                  *pecmd = 0;
+                  fd.fri.cbfind = pecmd - pline;
+                  expected = TEXTREPL;
+                  continue;
+               case TEXTREPL:
+                  prepl = p;
+                  p = nextLine(p);
+                  if (NULL == (pecmd = strrchr(prepl, '.'))) goto invalidFile;
+                  *pecmd = 0;
+                  expected = TEXTOPT;
+                  memcpy(buf, pline, fd.fri.cbfind);
+                  memcpy(buf + fd.fri.cbfind, " -> ", 4);
+                  memcpy(buf + fd.fri.cbfind + 4, prepl, pecmd - prepl + 1);
+                  if ((item = wLboxInsItem(hlstr, LIT_END, buf)) >= 0) {
+                     wLboxSetItemHnd(hlstr, item, fd.ul);
+                     cstrings++;
+                  } /* endif */
+                  continue;
+            } /* endswitch */
+         } /* endif */
+         p = nextLine(p);
+      } /* endfor */
+   // processa lista file -------------------------------------------------
+   } else {
+      if (pbf->offset) {     // se presente lista file
+         PSZ pflist, pcur;
+         pflist = (PBYTE)pbf + pbf->offset;
+         for (pcur = pflist; *pcur; pcur += strlen(pcur) + 1) {
+            // controllo correttezza file caricato
+            if (!(*pcur == 'R' || *pcur == ' '))
+               {pszerr = SZERR_INVALIDFILE; goto end;} /* endif */
+            fl = *pcur++ == 'R';
+            item = wLboxInsItem(hlfile, LIT_SORTASCENDING, pcur);
+            if (fl && item >= 0) wLboxSetItemHnd(hlfile, item, 1);
+         } /* endfor */
+         // aggiorna percorso ricerca file secondo percorso primo file
+         strcpy(pad->achpath, pflist + 1);
+         pcur = ioFNameFromPath(pad->achpath);
+         *pcur = 0;
+      } /* endif */
+      // processa lista stringhe ---------------------------------------------
+      if (pbf->frl.citems) {
+         PSZ pszitem = malloc(MAXSTRITEM);
+         if (!pszitem) {pszerr = SZERR_ALLOC; goto end;}
+         // secondo versione del file usa 2 diverse funzioni per ricavare
+         if (pad->is.bever) { // la lista delle stringhe di find/replace
+            if (!fillStrList(hlstr, pszitem, pbf))
+               {pszerr = SZERR_INVALIDFILE; goto end;} /* endif */
+         } else {
+            if (!fillStrListOld(hlstr, pszitem, pbf))
+               {pszerr = SZERR_INVALIDFILE; goto end;} /* endif */
+         } /* endif */
+         free(pszitem);
+      } /* endif */
+   } /* endif */
+   if ((cfiles && cstrings) || (pbf->offset && pbf->frl.citems)) {
+      WsetDefBtn(pad->hMain, BTN_START);
+   } else if (cfiles || pbf->offset) {
+      WinPostMsg(pad->hMain, WM_DEFERFOCUS, (MPARAM)EF_FILE, MPVOID);
+   } else {
+      WinPostMsg(pad->hMain, WM_DEFERFOCUS, (MPARAM)EF_STRFIND, MPVOID);
+   } /* endif */
+   rc = TRUE;
+end:
+   if (pszerr) Wprint(pad->hMain, pszerr, 0);
+   if (pbf) {free(pbf);}
+   enableBtns(pad->hMain);
+   WinEnableWindow(pad->hMain, TRUE);
+   pad->is.working = 0;
+   return TRUE;
+
+invalidFile:
+   pszerr = SZERR_INVALIDFILE;
+   goto end;
+}
+
+
+//==========================================================================\
+// - ricava dimensioni allocazione per scrittura file
+// - alloca la memoria necessaria
+// - legge il contenuto delle listbox scrivendo la struttura del file
+// - apre il file di dialogo per selezionare il nome di salvataggio file
+// - scrive il file
+//==========================================================================/
+
+BOOL SaveBedPrf(PAPPDATA pad) {
+   PBEDFILE pbf;
+   ULONG i, cbfndrepl, cbfiles, cstrings, cfiles;
+   PSZ pszerr = NULL;
+   PSZ pflist;
+   HWND hlfile = WinWindowFromID(pad->hMain, LB_FILE);
+   HWND hlstr = WinWindowFromID(pad->hMain, LB_STRINGS);
+   pad->is.working = 1;
+   WinEnableWindow(pad->hMain, FALSE);
+   // calcola allocazione approssimativa per la lista di sostituzioni
+   cstrings = wLboxQueryItemCount(hlstr);
+   cbfndrepl = cbFndReplList(hlstr, cstrings);
+   // calcola dimensione lista file (aggiunge 1 x flag ricorsivit… e 1 per term
+   cfiles = wLboxQueryItemCount(hlfile);
+   for (i = cbfiles = 0; i < cfiles; ++i)
+      cbfiles += WLboxQueryItemTextLength(hlfile, i) + 2;
+   cbfiles++;  // la lista viene terminata con un doppio zero
+   // alloca la memoria necessaria
+   if (!(pbf = malloc(cbfndrepl + cbfiles + 8)))
+      {pszerr = SZERR_ALLOC; goto end;}
+   pbf->sign = BEDPRFID1;      // setta ID file
+   // inizializza lista di sostituzioni
+   if (!(cbfndrepl = getFndReplData(hlstr, pad, &pbf->frl, cstrings)))
+      {pszerr = SZERR_ALLOC; goto end;}
+   pbf->offset = 8 + cbfndrepl;
+   // inizializza lista file
+   getFileListData(hlfile, (PSZ)((PBYTE)pbf + pbf->offset), cfiles);
+   if (!ioPsz2f(pad->achload, (PSZ)pbf, cbfndrepl + cbfiles + 8))
+      {pszerr = SZERR_SAVEPRF; goto end;}
+end:
+   if (pszerr) Wprint(pad->hMain, pszerr, 0);
+   if (pbf) {free(pbf);}
+   WinEnableWindow(pad->hMain, TRUE);
+   pad->is.working = 0;
+   return TRUE;
+}
+
+
+//==========================================================================\
+// setta il pointer di attesa quando il mouse si muove sulla finestra       |
+//==========================================================================/
+
+BOOL WsetWaitPtr(VOID) {
+   HPOINTER hptr = WinQuerySysPointer(HWND_DESKTOP, SPTR_WAIT, FALSE);
+   return (hptr? WinSetPointer(HWND_DESKTOP, hptr): FALSE);
+}
+
+//==========================================================================\
+// apre il file di dialogo restituendo un puntatore al nome del file        |
+// selezionato                                                              |
+// parametri:                                                               |
+// HWND hwnd: handle owner window                                           |
+// PSZ pszFile: in/out specifiche file da ricercare/nome file trovato       |
+// ULONG pszTitle: titolo dialogo                                           |
+// ULONG pszBtn: titolo bottone                                             |
+// ULONG fl: 0 = caricamento profilo editazione, 1 = ricerca file da        |
+//               editare, 2 = salvataggio profilo editazione                |
+// valore restituito:                                                       |
+// PFILEDLG struttura file dialog allocata o NULL se errore o si preme cancel
+//==========================================================================/
+
+PFILEDLG fileDlg(HWND hwnd, PSZ pszFile, PSZ pszext, PSZ pszTitle, PSZ pszBtn,
+                 ULONG fl) {
+   PFILEDLG pfdlg = NULL;
+   PSZ pszret = NULL;
+   ULONG afl[] = {FDS_OPEN_DIALOG,
+                  FDS_OPEN_DIALOG | FDS_MULTIPLESEL,
+                  FDS_SAVEAS_DIALOG | FDS_ENABLEFILELB};
+   if (!(pfdlg = (PFILEDLG)malloc(sizeof(FILEDLG)))) {
+      Wprint(hwnd, SZERR_ALLOC, 0);
+      return NULL;
+   } /* endif */
+   memset((PVOID)pfdlg, 0, sizeof(FILEDLG));
+   pfdlg->pszTitle = pszTitle;
+   pfdlg->pszOKButton = pszBtn;
+   pfdlg->cbSize = sizeof(FILEDLG);
+   pfdlg->pfnDlgProc = fl == 2? saveFileProc: NULL;
+   pfdlg->fl = FDS_CENTER | afl[fl];
+   strcpy(pfdlg->szFullFile, pszFile);
+   strcpy(ioFNameFromPath(pfdlg->szFullFile), pszext);
+   if (WinFileDlg(HWND_DESKTOP, hwnd, pfdlg) &&
+       pfdlg->lReturn == DID_OK) {
+      strcpy(pszFile, pfdlg->szFullFile);
+      if (fl != 1) {   // se non Š file dialog multiplo libera allocazione ora
+         free(pfdlg);
+         return (PFILEDLG)1;
+      } /* endif */
+      return pfdlg;
+   } // end if
+   free(pfdlg);
+   return NULL;
+}
+
+
+//==========================================================================\
+// calcola quantit… memoria necessaria per lista sostituzioni               |
+//==========================================================================/
+
+ULONG cbFndReplList(HWND hwnd, ULONG citems) {
+   ULONG i, cb;
+   if (!citems) return sizeof(FNDREPLLIST);
+   for (i = citems, cb = 0; i;)
+      // lunghezza totale oldstring->newstring
+      cb += WLboxQueryItemTextLength(hwnd, --i);
+   return (cb + 4);
+}
+
+
+//==========================================================================\
+// riempie la struttura della lista delle sostituzioni con il contenuto
+// della listbox
+// Parametri:
+// HWND hwnd : handle listbox stringhe
+// valore restituito:
+// dimensione totale dati find/replace - 0 = errore
+//==========================================================================/
+
+ULONG getFndReplData(HWND hwnd, PAPPDATA pad, PFNDREPLLIST pfrl, ULONG citems) {
+   ULONG rc = 0;
+   PFNDREPLITEM pfri;
+   PSZ pszitem;
+   INT i, rate;
+   ULONG hitem;
+   FRIDATA fd;
+   rate = pad->rate = 1;
+   pfrl->citems = citems;
+   if (!(pszitem = malloc(MAXSTRITEM))) return FALSE;
+   for (pfri = pfrl->fi, i = 0; i < citems; ++i) {
+      fd.ul = wLboxQueryItemHnd(hwnd, i);
+      fd.fri.cb = wLboxQueryItemText(hwnd, i, pszitem, MAXSTRITEM);
+      // se la stringa find/replace contiene caratteri di escape la converte
+      if (fd.fri.esc) {
+         if (!compilebinfr(pszitem,  &fd, pfri)) goto end;
+      } else {
+         pfri->cbfind = fd.fri.cbfind;
+         pfri->cb = fd.fri.cb;
+         memcpy(pfri->ach, pszitem, pfri->cbfind);
+         memcpy(pfri->ach + pfri->cbfind, pszitem + pfri->cbfind + 4,
+                pfri->cb - pfri->cbfind - 4);
+      } /* endif */
+      pfri->ins = fd.fri.ins;
+      pfri->esc = fd.fri.esc;
+      rate = (pfri->cb - pfri->cbfind - 4) / pfri->cbfind +
+             (((pfri->cb - pfri->cbfind - 4) % pfri->cbfind)? 1: 0);
+      if (rate > pad->rate) pad->rate = rate;
+      pfri = (PFNDREPLITEM)((PBYTE)pfri + pfri->cb);
+   } /* endfor */
+   rc = (PBYTE)pfri - (PBYTE)pfrl;
+end:
+   free(pszitem);
+   return rc;
+}
+
+
+//==========================================================================\
+// legge il contenuto della listbox file e costruisce una sequenza di       |
+// stringhe terminate da 0 e inizianti con uno spazio o con 'R' se il       |
+// file ha la flag di recorsivit…. Alla fine della lista aggiunge un        |
+// ulteriore 0 per indicare un nome di file vuoto                           |
+//==========================================================================/
+
+VOID getFileListData(HWND hlist, PSZ pfiles, ULONG citems) {
+   INT i;
+   for (i = 0; i < citems; ++i) {
+      *pfiles = (wLboxQueryItemHnd(hlist, i))? 'R': ' ';
+      pfiles += wLboxQueryItemText(hlist, i, pfiles + 1, MAXPATH) + 2;
+   } /* endfor */
+   *pfiles = 0;
+}
+
+
+//==========================================================================\
+//==========================================================================/
+
+MRESULT EXPENTRY saveFileProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2) {
+   if (msg == FDM_VALIDATE) {
+      if (ioFExists((PSZ)mp1, NULL))
+         return (MPARAM)Wprint(hwnd, SZ_ASKOVERWRT, PMPRNT_QUERY);
+   } /* endif */
+   return WinDefFileDlgProc(hwnd, msg, mp1, mp2);
+}
+
+
+//==========================================================================\
+// converte la stringa find/replace contenente caratteri di escape in
+// una valida struttura FNDREPLITEM
+// Parametri:
+// PSZ pszin: buffer contenente stringa da convertire
+// PFRIDATA pfd: dati relativi a contenuto buffer psz
+// PFNDREPLITEM pfri: buffer scrittura dati convertiti
+// valore restituito:
+// BOOL : TRUE/FALSE = successo/errore (presenza caratteri di escape non validi)
+//==========================================================================/
+
+BOOL compilebinfr(PSZ psz, PFRIDATA pfd, PFNDREPLITEM pfri) {
+   PSZ pszin = psz;      // puntatore in psz
+   PSZ pszout;           // puntatore in pfri->ach
+   pszin[pfd->fri.cbfind] = 0;
+   // converte stringa find
+   for (pszout = pfri->ach, pfri->cbfind = 0; ;) {
+      if (!*pszin) {
+         if (pfri->cbfind) {  // termine stringa find
+            pfri->cb = pszout - pfri->ach + 4;
+            break;
+         } else {
+            pszin += 4;
+            pfri->cbfind = pszout - pfri->ach;
+            continue;
+         } /* endif */
+      } /* endif */
+      // se carattere di escape
+      if (*pszin == '\\') {
+         if (!(pszin = escseq2ch(++pszin, pszout))) return FALSE;
+      } else {
+         *pszout = *pszin;
+      } /* endif */
+       ++pszin;
+       ++pszout;
+   } /* endfor */
+   return TRUE;
+}
+
+
+//==========================================================================\
+// controlla che le sequenze di escape presenti nella stringa contenuta     |
+// nell'item item della listbox hlist siano corrette                        |
+//==========================================================================/
+
+BOOL chkEscSeq(HWND hlist, ULONG item) {
+   BOOL rc = FALSE;
+   PSZ psz = malloc(MAXSTRITEM);
+   PSZ pszcur;
+   // controlla allocazione per lettura testo item lista stringhe
+   if (!psz) {
+      Wprint(HWND_DESKTOP, SZERR_ALLOC, PMPRNT_ERROR);
+      return FALSE;
+   } /* endif */
+   // legge testo item corrente
+   if (!wLboxQueryItemText(hlist, item, psz, MAXSTRITEM)) {
+      Wprint(HWND_DESKTOP, SZERR_LBXREADSTR, PMPRNT_ERROR);
+      goto end;
+   } /* endif */
+   // controlla correttezza sequenze di escape
+   for (pszcur = psz; *pszcur; ++pszcur) {
+      if (*pszcur == '\\') {
+         if (!(pszcur = escseq2ch(++pszcur, NULL))) {
+            Wprint(HWND_DESKTOP, SZERR_INVESCSEQ, PMPRNT_ERROR);
+            goto end;
+         } /* endif */
+      } /* endif */
+   } /* endfor */
+   rc = TRUE;
+end:
+   free(psz);
+   return rc;
+}
+
+
+//==========================================================================\
+// converte i(l) caratteri(e) successivo ad un carattere di escape nel
+// corrispondente valore
+// se i caratteri non sono validi restituisce -1
+// parametri:
+// PSZ pszin: stringa contenente caratteri esadecimali
+// PSZ pszout: puntatore carattere risultato conversione
+// valore restituito:                                                       |
+// PSZ puntatore successivo carattere in pszin / NULL se errore
+//==========================================================================/
+
+PSZ escseq2ch(PSZ pszin, PSZ pszout) {
+   LONG hexval;
+   switch (*pszin) {
+      case 'a': if (pszout) *pszout = '\a'; return pszin;
+      case 'b': if (pszout) *pszout = '\b'; return pszin;
+      case 'f': if (pszout) *pszout = '\f'; return pszin;
+      case 'n': if (pszout) *pszout = '\n'; return pszin;
+      case 'r': if (pszout) *pszout = '\r'; return pszin;
+      case 't': if (pszout) *pszout = '\t'; return pszin;
+      case 'v': if (pszout) *pszout = '\v'; return pszin;
+      case '\'':
+      case '\"':
+      case '?':
+      case '\\': if (pszout) *pszout = *pszin; return pszin;
+      case 'x':
+         if ((hexval = psz2hexch(++pszin)) >= 0) {
+            if (pszout) *pszout = hexval;
+         } else {
+            return NULL;
+         } /* endif */
+         return ++pszin;
+      default: return NULL;
+   } /* endswitch */
+}
+
+
+//==========================================================================\
+// converte una coppia di caratteri esadecimali in un numero
+// se i caratteri non sono validi restituisce -1
+// parametri:
+// PSZ psz: stringa contenente caratteri esadecimali
+// valore restituito:                                                       |
+// ULONG valore caratteri esadecimali
+//==========================================================================/
+
+LONG psz2hexch(PSZ psz) {
+   LONG l = 0;
+   INT i;
+   for (i = 4; i >= 0; ++psz, i -= 4) {
+      if (*psz >= '0' && *psz <= '9') {
+         l += (*psz - '0') << i;
+      } else if (*psz >= 'A' && *psz <= 'F') {
+         l += (*psz - 'A' + 10) << i;
+      } else if (*psz >= 'a' && *psz <= 'f') {
+         l += (*psz - 'a' + 10) << i;
+      } else {
+         return -1;
+      } /* endif */
+   } /* endfor */
+   return l;
+}
+
+
+//==========================================================================\
+// converte un'array di byte contenente caratteri non stampabili in una
+// stringa contenente le opportune sequenze di escape
+//==========================================================================/
+
+VOID ab2psz(PSZ pszout, PFNDREPLITEM pfri, PFRIDATA pfd) {
+   PSZ pszend = pfri->ach + pfri->cbfind;
+   PSZ pszstart = pszout;
+   PSZ psz;
+   for (psz = pfri->ach, pfd->fri.cbfind = 0; ; ) {
+      // se ha raggiunto fine stringa find o fine stringa find/replace
+      if (psz == pszend) {
+         if (pfd->fri.cbfind) break;
+         pfd->fri.cbfind = pszout - pszstart;
+         memcpy(pszout, " -> ", 4);
+         pszout += 4;
+         pszend = pfri->ach + pfri->cb - 4;
+         continue;
+      } /* endif */
+      if (*psz == '\\') {
+         memcpy(pszout, "\\\\", 2);
+         ++pszout;
+      } else if (*psz >= ' ' && *psz < '\xff') {
+         *pszout = *psz;
+      } else {
+         ULONG tmp;
+         switch (*psz) {
+            // sequenze di escape classiche
+            case '\a': memcpy(pszout, "\\a", 2); ++pszout; break;
+            case '\b': memcpy(pszout, "\\b", 2); ++pszout; break;
+            case '\f': memcpy(pszout, "\\f", 2); ++pszout; break;
+            case '\n': memcpy(pszout, "\\n", 2); ++pszout; break;
+            case '\r': memcpy(pszout, "\\r", 2); ++pszout; break;
+            case '\t': memcpy(pszout, "\\t", 2); ++pszout; break;
+            case '\v': memcpy(pszout, "\\v", 2); ++pszout; break;
+            // sequenze di escape espresse da stringa esadecimale
+            default:
+               *pszout++ = '\\';
+               *pszout++ = 'x';
+               tmp = *psz >> 4;
+               *pszout++ = tmp < 10? tmp + '0': tmp + 'a' - 10;
+               tmp = *psz & 0xf;
+               *pszout = tmp < 10? tmp + '0': tmp + 'a' - 10;
+               break;
+         } /* endswitch */
+      } /* endif */
+      ++psz;
+      ++pszout;
+   } /* endfor */
+   *pszout = 0;    // termina la stringa
+}
+
+
+//==========================================================================\
+// riempie la lista delle sostituzioni (stringhe find/replace) dai dati     |
+// letti da un file *.bep nel nuovo formato                                 |
+//==========================================================================/
+
+BOOL fillStrList(HWND hlstr, PSZ pszitem, PBEDFILE pbf) {
+   INT i;
+   PFNDREPLITEM pfri;
+   FRIDATA fd;
+   SHORT item;
+   for (i = 0, pfri = pbf->frl.fi; i < pbf->frl.citems; ++i) {
+      // controllo validit… file
+      if (((ULONG)pfri > (ULONG)((PBYTE)pbf + pbf->offset)) ||
+          ((pfri->cbfind + 4) > pfri->cb) ||
+          (pfri->cb > MAXSTRITEM))
+         return FALSE;
+      // se stringa contenente caratteri non stampabili la converte
+      // usando le opportune sequenze di escape
+      if (pfri->esc) {
+         ab2psz(pszitem, pfri, &fd);
+      } else {
+         memcpy(pszitem, pfri->ach, pfri->cbfind);
+         strcpy(pszitem + pfri->cbfind, " -> ");
+         memcpy(pszitem + pfri->cbfind + 4, pfri->ach + pfri->cbfind,
+                pfri->cb - pfri->cbfind - 4);
+         *(pszitem + pfri->cb) = 0;
+         fd.fri.cbfind = pfri->cbfind;
+      } /* endif */
+      fd.fri.ins = pfri->ins;
+      fd.fri.esc = pfri->esc;
+      item = wLboxInsItem(hlstr, LIT_END, pszitem);
+      wLboxSetItemHnd(hlstr, item, fd.ul);
+      pfri = (PFNDREPLITEM)(((PBYTE)pfri) + pfri->cb);
+   } /* endfor */
+   return TRUE;
+}
+
+
+//==========================================================================\
+// riempie la lista delle sostituzioni (stringhe find/replace) dai dati     |
+// letti da un file *.bep nel vecchio formato                               |
+//==========================================================================/
+
+BOOL fillStrListOld(HWND hlstr, PSZ pszitem, PBEDFILE pbf) {
+   INT i;
+   POLDFRITEM pfri;
+   FRIDATA fd;
+   SHORT item;
+   for (i = 0, pfri = (POLDFRITEM)pbf->frl.fi; i < pbf->frl.citems; ++i) {
+      // controllo validit… file
+      if (((ULONG)pfri > (ULONG)((PBYTE)pbf + pbf->offset)) ||
+          ((pfri->cbfind + 4) > pfri->cb) ||
+          (pfri->cb > MAXSTRITEM))
+         return FALSE;
+      memcpy(pszitem, pfri->ach, pfri->cbfind);
+      strcpy(pszitem + pfri->cbfind, " -> ");
+      memcpy(pszitem + pfri->cbfind + 4, pfri->ach + pfri->cbfind,
+             pfri->cb - pfri->cbfind - 4);
+      *(pszitem + pfri->cb) = 0;
+      fd.fri.cbfind = pfri->cbfind;
+      fd.fri.ins = pfri->ins;
+      fd.fri.esc = 0;
+      item = wLboxInsItem(hlstr, LIT_END, pszitem);
+      wLboxSetItemHnd(hlstr, item, fd.ul);
+      pfri = (POLDFRITEM)(((PBYTE)pfri) + pfri->cb);
+   } /* endfor */
+   return TRUE;
+}
+
+
+/* --------------------------------------------------------------------------
+ Move a listbox item one position up.
+- Parameters -------------------------------------------------------------
+ HWND hwnd  : dialog window handle.
+ INT offset : if greater than 0 move the item downward otherwise move
+              the item upward.
+- Return value -----------------------------------------------------------
+ VOID
+-------------------------------------------------------------------------- */
+VOID moveItem(HWND hwnd, INT offset) {
+   SHORT iMax, item;
+   ULONG handle;
+   CHAR buf[MAXSTRITEM];
+
+   hwnd = WinWindowFromID(hwnd, LB_STRINGS);
+   item = wLboxQuerySelItem(hwnd);
+   iMax = wLboxQueryItemCount(hwnd) - 1;
+   wLboxQueryItemText(hwnd, item, buf, MAXSTRITEM);
+   handle = wLboxQueryItemHnd(hwnd, item);
+   WinDeleteLboxItem(hwnd, item);
+   item = wLboxInsItem(hwnd, item + offset, buf);
+   if (item >= 0) wLboxSetItemHnd(hwnd, item, handle);
+   wLboxSelItem(hwnd, item);
+}
+

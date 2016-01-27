@@ -1,0 +1,22 @@
+        Archive Filename: be045fr.zip
+       Short Description: Batch Editor v.0.45 - French version.
+        Long Description: Batch Editor v.0.45 is a PM multithreaded application
+                          which allows to replace data in one or more files
+                          with various options (recur subdirectories, case
+                          insensitive, non printable characters).
+      Proposed directory
+           for placement: /pub/os2/util/convert
+
+               Your name: Alessandro Cantatore
+           Email address: acantatore - at - tin - dot - it
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://xoomer.virgilio.it/acantato
+      Would you like the
+   contact email address
+    included in listings? no
+
+Operating System/Version: OS/2 3.x and up
+ Additional requirements: none
+
+                Replaces: none

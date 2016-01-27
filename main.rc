@@ -1,0 +1,7 @@
+
+#include "main.h"
+#include "msgs.h"
+// icona applicazione
+ICON 1 "be.ico"
+
+RCINCLUDE "main.dlg"

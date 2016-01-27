@@ -1,0 +1,249 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Alessandro Cantatore">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#0000ff" vlink="#800080" alink="#ff0000">
+<br>
+<table width="100%" bgcolor="#e0e0ff" cellpadding=4 cellspacing=0 border=0>
+<tr><td>[2004 May 11]</td>
+<td align=right><a href="http://xoomer.virgilio.it/acantato">ACSoft Homepage</a>
+</td></tr></table>
+<center>
+<br>
+<h1>Batch Editor v. 0.46 Beta</h1>
+</center>
+<center>
+<img border="0" src="be0.gif" width="70" height="70"
+alt="[Application logo]">
+</center>
+<p>
+</p>
+<ul>
+<li><a href="#0000">License
+agreement</a></li>
+<li><a href="#0001">Introduction</a></li>
+<li><a href="#new">What is new in this version</a></li>
+<li><a href="#0003">Installation</a></li>
+<li><a href="#0004">Features and settings</a></li>
+<li><a href="#0006">Planned features</a></li>
+<li><a href="#0007">Registration</a><br>
+</li>
+</ul>
+<br>
+<hr>
+<h2><a name="0000">License agreement</a></h2>
+<ul>
+<li>Under no circumstances the author is liable for any loss or damage.</li>
+<li> You are free to use this version of the program on as many machines
+as you like.</li>
+<li> You are free to distribute the program provided that you include all
+the files in the archive without any modification.</li>
+<li> You are not allowed to sell the program, but can charge a reasonable
+amount to cover the cost of the distribution media.</li>
+<li><b>The use of the program implies acceptance of the conditions stated
+above!</b></li>
+</ul>
+<p><br>
+</p>
+<h2><a name="0001">Introduction</a></h2>
+Batch Editor is a small multithreaded PM application which allows to find
+and replace a list of strings in one or more files.<br>
+You can use it to edit text files or binary files.<br>
+Replacing paths references in the system files and application INI files
+you can use it to update them when you move an application to a different
+path.<br>
+You can even use it on your system files, when moving your OS/2 installation to a different drive/partition, by replacing all the partition letter occurrences.<br>
+<p><br>
+</p>
+<h2><a name="new">What is new in this version</a></h2>
+<ul>
+<li>Two borderless arrow buttons have been added to change the
+order of the items in the strings list.
+</ul>
+<p><br>
+</p>
+<h2><a name="0003">Installation</a></h2>
+You just need to copy in any directory the following files (they must be
+in the same directory):<ul>
+BATCHED.EXE<br>
+AFCBSU00.DLL<br>
+AFCPMU00.DLL<br>
+BATCHED.HTM (User's guide)<br>
+BE*.GIF (images used by the documentation)<br>
+</ul>
+Then create a program object (if you have warp 4 you just have to drag the
+BATCHED.EXE icon and drop it in your favorite folder) setting:<dl>
+<dt><b>Program page:</b></dt>
+<dd>
+<dl>
+<dt>Path and file name:</dt>
+<dd>BATCHED.EXE including the full path of the file</dd>
+<dt>Parameters:</dt>
+<dd>%*</dd>
+<dt>Working directory:</dt>
+<dd>The full path were you installed the program files</dd>
+</dl>
+</dd>
+<dt><b>Association page:</b></dt>
+<dd>
+<dl>
+<dd>Write<tt>*.BEP</tt> in the <i>New name:</i>&nbsp; field and
+click on the <i>Add</i>&nbsp; button</dd>
+</dl>
+</dd>
+<dt><b>Icon page:</b></dt>
+<dd>
+<dl>
+<dt>Title:</dt>
+<dd>Batch editor</dd>
+</dl>
+</dd>
+</dl>
+The program doesn't need any config.sys modification and doesn't write any
+data to the system INI files.<br>
+<p><br>
+</p>
+<h2><a name="0004">Features and settings</a></h2>
+The program consists in two listboxes and few buttons which are enabled or
+disabled as needed.<br>
+<br>
+<center><img border="0" src="be1.gif" width="632" height="390"
+alt="[screenshot]">
+</center>
+<p><br>
+</p>
+<h3>The <i>File</i>&nbsp; controls</h3>
+The purpose of the listbox on the left, <i>Files:</i>&nbsp;, is to list
+all the files which are to be edited.<br>
+File names can include the wildcards<tt>*</tt> and<tt>?</tt>.<br>
+To add a file name to the list you can write its full path in the entryfield
+below the <i>Files:</i>&nbsp; listbox and click on the <i>Add</i>&nbsp; button, select one or more files through the dialog which pops-up when you click on
+the <i>Find...</i>&nbsp; button, or, more easily, just open a folder and
+drag the files you want to edit dropping them onto the listbox.<br>
+When a file name is selected from the <i>Files:</i>&nbsp; list, the <i>Remove</i>&nbsp;
+button and the <i>Recur subdirectories</i>&nbsp; checkbox are enabled. The
+<i>Remove</i>&nbsp; button deletes the selected file name from the list, while
+the checkbox allows to search all the matching file names through the subdirectories
+of the pathname selected in the listbox.<br>
+A double click on a file name put the file name back in the entry field
+for editing.<br>
+As soon as some text is typed in the File entryfield, the <i>Add</i>&nbsp; button becomes the default one, so you just need to press the <i>Enter</i>&nbsp; key, once the file name is completed, to have it added to the list. Then
+the File entryfield gets again the focus and you can type the next file name.
+This way it is very easy to create a list of files just typing through the
+keyboard.<p><br>
+</p>
+<h3>The <i>Strings</i>&nbsp; controls</h3>
+The couples of strings to be found and replaced are listed in the listbox
+on the right, <i>Strings:</i>&nbsp;, separated by an arrow<tt>" -&gt; "</tt>.<br>
+The entryfields <i>Find:</i>&nbsp; and <i>Replace:</i>&nbsp; and the button
+<i>Add</i>&nbsp; allow to add a couple of strings to the list.<br>
+When the <i>Replace</i>&nbsp; field is empty, all the found strings are just
+deleted. The <i>Remove</i>&nbsp; button and double clicks on the items in
+the list work as in the <i>Files:</i>&nbsp; list.<br>
+The <i>Remove all</i>&nbsp; button removes all the strings without any further
+request of confirmation.<br>
+It is easy to create a list of <i>find/replace</i>&nbsp; strings using just
+the keyboard. Just start typing in the <i>Find:</i>&nbsp; field: the <i>Add</i>&nbsp; button will be enabled. As soon as the <i>find</i>&nbsp; string has been
+completed you can press the <i>Enter</i>&nbsp; key to give focus to the <i>Replace:</i>&nbsp; field. Now you can type the <i>replace</i>&nbsp; string and press <i>Enter</i>&nbsp;,
+or just press <i>Enter</i>&nbsp;, if the replace string is an empty one:
+the <i>find/replace</i>&nbsp; string pair will be added to the <i>Strings</i>&nbsp;
+list and the focus will go back to the <i>Find</i>&nbsp; field allowing you to enter the next string pair.<br>
+The order of the find/replace string pairs can be changed by clicking on
+the <i>two arrows</i>&nbsp; on the top-right corner of the listbox.<br>
+The checkbox <i>Case insensitive</i>&nbsp; is enabled as soon as one item
+in the list is selected and will allow to search the selected string in case
+insensitive mode.<br>
+The checkbox <i>Escape chars</i>&nbsp;, enabled on item selection, means that the selected item will be interpreted as a sequence of escape characters.<br>
+<br>
+<center><img border="0" src="be2.gif" width="369" height="58"
+alt="[escape sequence screenshot]">
+</center>
+<p>The escape character is the slash:<tt> \</tt>. Valid escape sequences
+are:</p>
+<dl compact="">
+<dt><tt>\a</tt></dt>
+<dd>alarm (hexadecimal value: 0x07)</dd>
+<dt><tt>\b</tt></dt>
+<dd>backspace (hexadecimal value: 0x08)</dd>
+<dt><tt>\f</tt></dt>
+<dd>form feed (hexadecimal value: 0x0c)</dd>
+<dt><tt>\n</tt></dt>
+<dd>new line (hexadecimal value: 0x0a)</dd>
+<dt><tt>\r</tt></dt>
+<dd>return (hexadecimal value: 0x0d)</dd>
+<dt><tt>\t</tt></dt>
+<dd>horizontal tab (hexadecimal value: 0x09)</dd>
+<dt><tt>\v</tt></dt>
+<dd>vertical tab (hexadecimal value: 0x0b)</dd>
+<dt><tt>\'</tt></dt>
+<dd>single quote (hexadecimal value: 0x27)</dd>
+<dt><tt>\"</tt></dt>
+<dd>double quote (hexadecimal value: 0x22)</dd>
+<dt><tt>\?</tt></dt>
+<dd>question mark (hexadecimal value: 0x3f)</dd>
+<dt><tt>\\</tt></dt>
+<dd>the escape char<tt> \</tt>itself (hexadecimal value: 0x5c)</dd>
+<dt><tt>\xnn</tt></dt>
+<dd>any character by its hexadecimal value</dd>
+</dl>
+<p><br>
+</p>
+<h3>The other buttons</h3>
+Once you have filled the two lists, according to your needs, you must click
+on the <i>Start</i>&nbsp; button to start the editing procedure.<br>
+A progress dialog allows to monitor the elaboration. The <i>Stop</i>&nbsp;
+button in this dialog will terminate the procedure.<p> Through the <i>Save</i>&nbsp; button it is possible to save the current lists of files and strings with the relative find/replace options, in a binary
+file (edition profile).</p>
+<p> The <i>Load</i>&nbsp; button loads a previously saved edition profile in the current window.</p>
+<p> The edition profiles are saved by default with a<tt>*.bep</tt> extension.
+For that reason, associating this kind of file to the program, a double click
+on the document icon will allow to launch Batch editor.</p>
+<p><b>Notes:</b><br>
+</p>
+<ul>
+<li>The options (<i>Recur subdirectories, Case insensitive, Escape chars</i>&nbsp;) do not apply to all files or strings but only to the selected ones.</li>
+<li>The escape sequences<tt> \'</tt>,<tt> \"</tt>and<tt> \?</tt>are just
+for the purpose of compatibility with C source code (if you are filling the
+fields by pasting stings from a C source code file).<br>
+You can directly type<tt> '</tt>,<tt> "</tt>or<tt> ?</tt>, without any
+preceding<tt> \</tt>, in a string with escape sequences: they will be interpreted
+correctly!</li>
+<li>When specifying a character by its hexadecimal value, you must include
+2 hexadecimal digits, otherwise it will not be interpreted correctly. For
+instance, valid escape sequences of this type are:<tt> \x09</tt>(<tt> \x9
+</tt>is considered an error),<tt> \x90</tt> ,<tt> \xff</tt>, etc...</li>
+<li>The current version of Batch Editor doesn't perform any check on the
+strings inserted in the listbox. Since strings are seeked and replaced in
+the same order as they appear in the list, the order is critical when the
+list of strings to be found contains strings which are sub-strings of other
+strings. To avoid undesired substitutions the sub-strings must be listed
+below the strings.<br>
+No option is yet provided for <i>word</i>&nbsp; search. I.e. if you enter
+<i>copy</i>&nbsp; as string to be searched all the occurrences of <i>copy</i>&nbsp;
+and of words including <i>copy</i>&nbsp; will be edited. To avoid the substitution
+of some words you must substitute them with themselves. For instance, to preserve
+all occurrences of <i>copyFiles</i>&nbsp; just put this couple of strings: <i>copyFiles -&gt; copyFiles</i>&nbsp; above <i>copy -&gt; ...</i>&nbsp;
+in the list.</li>
+<li><b>WARNING:</b> The program doesn't save a backup copy of the files
+which are beeing edited. You must do it yourself if the files are critical.<br>
+</li>
+</ul>
+<p></p>
+<p><br>
+</p>
+<h2><a name="0006">Planned features</a></h2>
+<ul>
+<li>No further development is planned as OS/2 does not run reliably
+on my new PC and I'm soon switching to linux.
+<li>The full source code will soon released to the public.
+</ul>
+<p><br>
+</p>
+<h2><a name="0007">Registration</a></h2>
+As a limited features beta, this version is completely free.<br>
+<p></p>
+<br>
+<br>
+</body>
+</html>

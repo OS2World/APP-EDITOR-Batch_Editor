@@ -1,0 +1,54 @@
+migliorare importazione da file testo (non converte sequense escape)
+
+BUG
+* dopo rimozione file deve togliere check dalla checkbox
+* dopo drop file nella lista deve abilitare bottone esegui
+* riscrive file (aggiornando la data) anche se non modificati
+NO- dopo drop file deve abilita checkbox "recur subdirectories"
+* ? \x0a -> <stringa nulla> causa sys3175
+* \n -> <stringa nulla> provoca sostituzione con ' '
+(vedere index.html file gtk)
+
+- opzione per ignorare file con attributo readonly
+- opzione per lasciare inalterata data file
+
+
+- funzioni copiate da mrsr: (grep facilitato - *= mie idee)
+  - ricerca all'interno di blocchi:
+    - definizione inizio del blocco
+    - definizione fine blocco
+    - opzione EOF assimilabile a fine blocco
+    * definizione wild chars (possibilita' di usare ? e * nelle stringhe
+      di ricerca e sostituzione)
+      usare ^ come equivalente di * per i caratteri <= ' ' (caratteri di
+      controllo) usare \ come carattere di escape:
+      \\ = \
+      \? = ?
+      \* = *
+      \^ = ^
+    * definizione stringhe di esclusione (possibili + stringhe)
+      Per esempio:
+      stringa di ricerca WinCreate*(
+      esclusione WinCreateWin*( | WinCreateMenu, ecc
+
+opzione eliminazione righe vuote
+opzione eliminazione spazi fine file
+opzione conversione new line formato PC-UNIX-MAC
+opzione conversione tab in spazi
+
+possibilit… di definizione di passi multipli di ricerca/sostituzione
+cioŠ processare prima lista di sostituzioni, seconda lista, terza lista,
+ecc...
+
+- specifiche file:
+  permettere wildchar, |, &, date, time, size, attributi > < = >= <=
+  attributi: ignorare file readonly, file S, file H,
+             resettare attributi
+             lasciare data file inalterata
+
+
+caratteristiche di SED
+- possibilit… di specificare (tramite numero) le linee da modificare
+- possibilit… di specificare linea iniziale e passo di linee da modificare
+  (es. modifica ogni 3 linee a partire dalla 2)
+

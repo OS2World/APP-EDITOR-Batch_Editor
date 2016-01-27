@@ -1,0 +1,45 @@
+BEPT la firma pu• essere seguita da un commento
+
+
+-FILES: ------------- inizio sezione file -----------------------------------
+
+ le righe che non iniziano con un comando '>' sono ignorate
+ lista file da ricercare
+ il formato Š
+ -<R|->:<specifiche file>.
+ dove:
+    >                  indica inizio comando
+    opzione            R/- recur / don't recur subdirectories
+                       che indica di ricercare i file nelle subdirectory
+    specifiche file    nome file incluso path e opzionali wildcards
+
+-R:.
+--:.
+-R:.
+--:.
+-R:.
+--:.
+-R:.
+--:.
+
+-TEXT: -------------- inizio sezione testo ----------------------------------
+
+ il comando Š su 3 linee:
+ -opzioni
+ -<testo da sostituire>.
+ -<nuovo testo>.
+
+ le uniche opzioni valide sono :
+ E :           escape characters
+ I :           case insensitive
+
+-EI
+-.
+-.
+
+-
+-.
+-.
+
+
+ --------- fine del file ---------

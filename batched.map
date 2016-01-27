@@ -1,0 +1,317 @@
+
+ BATCHED
+
+ Start         Length     Name                   Class
+ 0001:00000000 00000584FH CODE32                 CODE 32-bit
+	at offset 00000000 01888H bytes from F:\dev\PRJ\FindNreplace\be05\util.obj (util.c)
+	at offset 00001890 00079H bytes from F:\dev\PRJ\FindNreplace\be05\_api.obj (_api.c)
+	at offset 00001910 015C5H bytes from F:\dev\PRJ\FindNreplace\be05\main.obj (main.c)
+	at offset 00002ee0 00A95H bytes from F:\dev\PRJ\FindNreplace\be05\object.obj (object.c)
+	at offset 00003978 0000BH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\calls.asm)
+	at offset 00003984 00005H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\cfree.c)
+	at offset 0000398c 00013H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\cmalloc.c)
+	at offset 000039a0 00003H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\fpninit.asm)
+	at offset 000039a4 0000FH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\fpreset.asm)
+	at offset 000039b4 00014H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\memchr.c)
+	at offset 000039c8 00016H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\memcmp.c)
+	at offset 000039e0 0001FH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\memcpy.c)
+	at offset 00003a00 0002CH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\memset.c)
+	at offset 00003a2c 002BFH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rcreate.c)
+	at offset 00003cec 000F1H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rinit.c)
+	at offset 00003de0 0174CH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rmalloc.c)
+	at offset 0000552c 0000DH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\sctdt.c)
+	at offset 0000553c 001E7H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\setuparg.asm)
+	at offset 00005724 00032H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\strcat.c)
+	at offset 00005758 0002AH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\strcpy.c)
+	at offset 00005784 00011H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\strlen.c)
+	at offset 00005798 0001EH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\strrchr.c)
+	at offset 000057b8 0000CH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\terminat.c)
+	at offset 000057c4 00005H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\wctdt.c)
+	at offset 000057cc 00005H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\wk_rmem.c)
+	at offset 000057d4 00003H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\wk_walk.c)
+	at offset 000057d8 00006H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\cppinit.asm)
+	at offset 000057e0 0006FH bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\dde4nstr.c)
+
+ 0002:00000000 000000290H CONST32_RO             CONST 32-bit
+	at offset 00000000 000FCH bytes from F:\dev\PRJ\FindNreplace\be05\util.obj (util.c)
+	at offset 000000fc 0014DH bytes from F:\dev\PRJ\FindNreplace\be05\main.obj (main.c)
+	at offset 0000024c 00044H bytes from F:\dev\PRJ\FindNreplace\be05\object.obj (object.c)
+
+ 0003:00000000 000000018H DDE4_DATA32            DATA 32-bit
+	at offset 00000000 00002H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\fpreset.asm)
+	at offset 00000004 00010H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\setuparg.asm)
+	at offset 00000014 00004H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\exeentry.asm)
+
+ 0004:00000000 000000014H DATA32                 DATA 32-bit
+	at offset 00000000 00004H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rinit.c)
+	at offset 00000004 00010H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rmalloc.c)
+
+ 0004:00000014 000000000H CTOR_DTOR1             DATA 32-bit
+
+ 0004:00000014 000000000H CTOR_DTOR2             DATA 32-bit
+
+ 0004:00000014 000000000H CTOR_DTOR3             DATA 32-bit
+
+ 0004:00000014 00000001CH BSS32                  BSS 32-bit
+	at offset 00000000 00008H bytes from F:\dev\PRJ\FindNreplace\be05\main.obj (main.c)
+	at offset 00000008 00008H bytes from F:\dev\PRJ\FindNreplace\be05\object.obj (object.c)
+	at offset 00000010 00004H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\rinit.c)
+	at offset 00000014 00008H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\dde4nstr.c)
+
+ 0004:00000030 00000000CH c_common               BSS 32-bit
+
+ 0004:00000040 000008000H STACK32                STACK 32-bit
+	at offset 00000000 08000H bytes from F:\DEV\IBMCPP\LIB\cppon30.lib (D:\SwordCSD\crt\exeentry.asm)
+
+
+ Origin   Group
+ 0000:0   FLAT
+ 0004:0   DGROUP
+
+  Address         Publics by Name
+
+ 0001:00000A7D       cbFndReplList
+ 0001:000003B1       chkEscSeq
+ 0001:000018BF       DlgSend
+ 0000:00000000  Imp  DosAllocMem          (DOSCALLS.299)
+ 0000:00000000  Imp  DosCloseEventSem     (DOSCALLS.326)
+ 0000:00000000  Imp  DosCreateEventSem    (DOSCALLS.324)
+ 0000:00000000  Imp  DosCreateThread      (DOSCALLS.311)
+ 0000:00000000  Imp  DosExit              (DOSCALLS.234)
+ 0000:00000000  Imp  DosFreeMem           (DOSCALLS.304)
+ 0000:00000000  Imp  DosGetInfoBlocks     (DOSCALLS.312)
+ 0000:00000000  Imp  DosPostEventSem      (DOSCALLS.328)
+ 0000:00000000  Imp  DosQueryPathInfo     (DOSCALLS.223)
+ 0000:00000000  Imp  DosQuerySysInfo      (DOSCALLS.348)
+ 0000:00000000  Imp  DosSetPathInfo       (DOSCALLS.219)
+ 0000:00000000  Imp  DosSleep             (DOSCALLS.229)
+ 0000:00000000  Imp  DrgAccessDraginfo    (PMDRAG.32)
+ 0000:00000000  Imp  DrgFreeDraginfo      (PMDRAG.39)
+ 0000:00000000  Imp  DrgQueryDragitemCount (PMDRAG.45)
+ 0000:00000000  Imp  DrgQueryDragitemPtr  (PMDRAG.46)
+ 0000:00000000  Imp  DrgQueryStrName      (PMDRAG.49)
+ 0000:00000000  Imp  DrgVerifyRMF         (PMDRAG.59)
+ 0001:00001890       Enable
+ 0001:000016F6       enableBtns
+ 0001:0000066E       fileDlg
+ 0001:00003984       free
+ 0001:00000847       getFndReplData
+ 0000:00000000  Imp  ioF2psz              (AFCBSU00.302)
+ 0000:00000000  Imp  ioFExists            (AFCBSU00.303)
+ 0000:00000000  Imp  ioProcessTree        (AFCBSU00.306)
+ 0000:00000000  Imp  ioPsz2f              (AFCBSU00.307)
+ 0001:00000F94       LoadBedPrf
+ 0001:00002DC6       main
+ 0001:0000398C       malloc
+ 0001:000039B4       memchr
+ 0001:000039C8       memcmp
+ 0001:000039E0       memcpy
+ 0001:00003A00       memset
+ 0001:000000E2       moveItem
+ 0001:0000189D       Post
+ 0000:00000000  Imp  pszcpy               (AFCBSU00.504)
+ 0000:00000000  Imp  pszlastchr           (AFCBSU00.502)
+ 0001:00001601       resetStrCtls
+ 0001:00000AE3       SaveBedPrf
+ 0001:000018AE       Send
+ 0001:0000391B       StartObjectThread
+ 0001:00005724       strcat
+ 0001:00005758       strcpy
+ 0001:00005784       strlen
+ 0001:00005798       strrchr
+ 0000:00000000  Imp  sts_free             (AFCBSU00.101)
+ 0000:00000000  Imp  sts_heapmin          (AFCBSU00.102)
+ 0000:00000000  Imp  sts_malloc           (AFCBSU00.100)
+ 0001:000018EA       sysinfo
+ 0000:00000000  Imp  WcenterWindow        (AFCPMU00.101)
+ 0000:00000000  Imp  WinCancelShutdown    (PMWIN.705)
+ 0000:00000000  Imp  WinCreateMsgQueue    (PMWIN.716)
+ 0000:00000000  Imp  WinCreateWindow      (PMWIN.909)
+ 0000:00000000  Imp  WinDefDlgProc        (PMWIN.910)
+ 0000:00000000  Imp  WinDefFileDlgProc    (PMCTLS.5)
+ 0000:00000000  Imp  WinDefWindowProc     (PMWIN.911)
+ 0000:00000000  Imp  WinDestroyMsgQueue   (PMWIN.726)
+ 0000:00000000  Imp  WinDestroyWindow     (PMWIN.728)
+ 0000:00000000  Imp  WinDispatchMsg       (PMWIN.912)
+ 0000:00000000  Imp  WinEnableWindow      (PMWIN.735)
+ 0000:00000000  Imp  WinFileDlg           (PMCTLS.4)
+ 0000:00000000  Imp  WinFreeFileDlgList   (PMCTLS.6)
+ 0000:00000000  Imp  WinGetMsg            (PMWIN.915)
+ 0001:000018DD       winid
+ 0000:00000000  Imp  WinInitialize        (PMWIN.763)
+ 0000:00000000  Imp  WinLoadDlg           (PMWIN.924)
+ 0000:00000000  Imp  WinPostMsg           (PMWIN.919)
+ 0000:00000000  Imp  WinQueryDlgItemText  (PMWIN.815)
+ 0000:00000000  Imp  WinQuerySysPointer   (PMWIN.828)
+ 0000:00000000  Imp  WinQueryWindow       (PMWIN.834)
+ 0000:00000000  Imp  WinQueryWindowPtr    (PMWIN.839)
+ 0000:00000000  Imp  WinQueryWindowTextLength (PMWIN.842)
+ 0000:00000000  Imp  WinRegisterClass     (PMWIN.926)
+ 0000:00000000  Imp  WinSendDlgItemMsg    (PMWIN.903)
+ 0000:00000000  Imp  WinSendMsg           (PMWIN.920)
+ 0000:00000000  Imp  WinSetDlgItemText    (PMWIN.859)
+ 0000:00000000  Imp  WinSetFocus          (PMWIN.860)
+ 0000:00000000  Imp  WinSetPointer        (PMWIN.866)
+ 0000:00000000  Imp  WinSetWindowPtr      (PMWIN.876)
+ 0000:00000000  Imp  WinSetWindowText     (PMWIN.877)
+ 0000:00000000  Imp  WinSubclassWindow    (PMWIN.929)
+ 0000:00000000  Imp  WinTerminate         (PMWIN.888)
+ 0001:000018D0       wintxt
+ 0000:00000000  Imp  WinWaitEventSem      (PMWIN.978)
+ 0000:00000000  Imp  WinWindowFromID      (PMWIN.899)
+ 0000:00000000  Imp  Wprint               (AFCPMU00.108)
+ 0000:00000000  Imp  WprogressBar         (AFCPMU00.3)
+ 0000:00000000  Imp  wpsznicmp            (AFCBSU00.515)
+ 0000:00000000  Imp  WsetDefBtn           (AFCPMU00.121)
+ 0000:00000000  Imp  WsetDlgFonts         (AFCPMU00.112)
+ 0000:00000000  Imp  WsetDlgIcon          (AFCPMU00.113)
+ 0001:00000794       WsetWaitPtr
+ 0004:00000028       _argc
+ 0004:0000002C       _argv
+ 0001:00003978       _callback_opt_sys
+ 0001:000057D8       _cppinit
+ 0004:00000000       _default_heap
+ 0001:000057E0       _exestart
+ 0001:000039A0       _fpninit
+ 0001:000039A4       _fpreset
+ 0004:00000034       _reg_heap
+ 0001:00003D10       _rmem_init
+ 0001:00003CEC       _rmem_term
+ 0001:0000553C       _setuparg
+ 0001:000057B8       _terminate
+ 0001:00003B8C       _uaddmem
+ 0001:00003A2C       _ucreate
+ 0001:00004224       _ufree
+ 0001:000051A8       _umalloc
+ 0004:00000038       _walk_used
+ 0001:000057CC       _w_uheap_verify
+ 0001:000057D4       _w_walking
+ 0001:0000552C       __sctordtorInit
+ 0001:00005534       __sctordtorTerm
+ 0001:000057C4       __wctordtorInit
+ 0001:000057C8       __wctordtorTerm
+
+  Address         Publics by Value
+
+ 0000:00000000  Imp  DrgAccessDraginfo    (PMDRAG.32)
+ 0000:00000000  Imp  DosQueryPathInfo     (DOSCALLS.223)
+ 0000:00000000  Imp  WinDefFileDlgProc    (PMCTLS.5)
+ 0000:00000000  Imp  WinDefWindowProc     (PMWIN.911)
+ 0000:00000000  Imp  WinSetWindowPtr      (PMWIN.876)
+ 0000:00000000  Imp  WinSubclassWindow    (PMWIN.929)
+ 0000:00000000  Imp  DosQuerySysInfo      (DOSCALLS.348)
+ 0000:00000000  Imp  WinSendDlgItemMsg    (PMWIN.903)
+ 0000:00000000  Imp  WinCreateMsgQueue    (PMWIN.716)
+ 0000:00000000  Imp  WinCancelShutdown    (PMWIN.705)
+ 0000:00000000  Imp  WinSetWindowText     (PMWIN.877)
+ 0000:00000000  Imp  DosCloseEventSem     (DOSCALLS.326)
+ 0000:00000000  Imp  WinWindowFromID      (PMWIN.899)
+ 0000:00000000  Imp  WinEnableWindow      (PMWIN.735)
+ 0000:00000000  Imp  WinCreateWindow      (PMWIN.909)
+ 0000:00000000  Imp  DosGetInfoBlocks     (DOSCALLS.312)
+ 0000:00000000  Imp  DrgQueryStrName      (PMDRAG.49)
+ 0000:00000000  Imp  WinWaitEventSem      (PMWIN.978)
+ 0000:00000000  Imp  WinQueryDlgItemText  (PMWIN.815)
+ 0000:00000000  Imp  Wprint               (AFCPMU00.108)
+ 0000:00000000  Imp  WinRegisterClass     (PMWIN.926)
+ 0000:00000000  Imp  DosPostEventSem      (DOSCALLS.328)
+ 0000:00000000  Imp  DosCreateThread      (DOSCALLS.311)
+ 0000:00000000  Imp  pszcpy               (AFCBSU00.504)
+ 0000:00000000  Imp  wpsznicmp            (AFCBSU00.515)
+ 0000:00000000  Imp  ioFExists            (AFCBSU00.303)
+ 0000:00000000  Imp  WinGetMsg            (PMWIN.915)
+ 0000:00000000  Imp  WinPostMsg           (PMWIN.919)
+ 0000:00000000  Imp  WsetDefBtn           (AFCPMU00.121)
+ 0000:00000000  Imp  WinLoadDlg           (PMWIN.924)
+ 0000:00000000  Imp  WinFileDlg           (PMCTLS.4)
+ 0000:00000000  Imp  WinSendMsg           (PMWIN.920)
+ 0000:00000000  Imp  DosFreeMem           (DOSCALLS.304)
+ 0000:00000000  Imp  DrgQueryDragitemPtr  (PMDRAG.46)
+ 0000:00000000  Imp  sts_malloc           (AFCBSU00.100)
+ 0000:00000000  Imp  WinDestroyMsgQueue   (PMWIN.726)
+ 0000:00000000  Imp  WinDestroyWindow     (PMWIN.728)
+ 0000:00000000  Imp  DosCreateEventSem    (DOSCALLS.324)
+ 0000:00000000  Imp  WinQueryWindowPtr    (PMWIN.839)
+ 0000:00000000  Imp  ioPsz2f              (AFCBSU00.307)
+ 0000:00000000  Imp  WinFreeFileDlgList   (PMCTLS.6)
+ 0000:00000000  Imp  WinSetDlgItemText    (PMWIN.859)
+ 0000:00000000  Imp  ioF2psz              (AFCBSU00.302)
+ 0000:00000000  Imp  DosSleep             (DOSCALLS.229)
+ 0000:00000000  Imp  DosExit              (DOSCALLS.234)
+ 0000:00000000  Imp  WinQuerySysPointer   (PMWIN.828)
+ 0000:00000000  Imp  sts_free             (AFCBSU00.101)
+ 0000:00000000  Imp  WinDispatchMsg       (PMWIN.912)
+ 0000:00000000  Imp  WinQueryWindow       (PMWIN.834)
+ 0000:00000000  Imp  DosSetPathInfo       (DOSCALLS.219)
+ 0000:00000000  Imp  WinSetPointer        (PMWIN.866)
+ 0000:00000000  Imp  ioProcessTree        (AFCBSU00.306)
+ 0000:00000000  Imp  WinInitialize        (PMWIN.763)
+ 0000:00000000  Imp  pszlastchr           (AFCBSU00.502)
+ 0000:00000000  Imp  WcenterWindow        (AFCPMU00.101)
+ 0000:00000000  Imp  DrgFreeDraginfo      (PMDRAG.39)
+ 0000:00000000  Imp  WinDefDlgProc        (PMWIN.910)
+ 0000:00000000  Imp  WsetDlgFonts         (AFCPMU00.112)
+ 0000:00000000  Imp  DrgVerifyRMF         (PMDRAG.59)
+ 0000:00000000  Imp  WinSetFocus          (PMWIN.860)
+ 0000:00000000  Imp  WprogressBar         (AFCPMU00.3)
+ 0000:00000000  Imp  DosAllocMem          (DOSCALLS.299)
+ 0000:00000000  Imp  sts_heapmin          (AFCBSU00.102)
+ 0000:00000000  Imp  WsetDlgIcon          (AFCPMU00.113)
+ 0000:00000000  Imp  DrgQueryDragitemCount (PMDRAG.45)
+ 0000:00000000  Imp  WinTerminate         (PMWIN.888)
+ 0000:00000000  Imp  WinQueryWindowTextLength (PMWIN.842)
+ 0001:000000E2       moveItem
+ 0001:000003B1       chkEscSeq
+ 0001:0000066E       fileDlg
+ 0001:00000794       WsetWaitPtr
+ 0001:00000847       getFndReplData
+ 0001:00000A7D       cbFndReplList
+ 0001:00000AE3       SaveBedPrf
+ 0001:00000F94       LoadBedPrf
+ 0001:00001601       resetStrCtls
+ 0001:000016F6       enableBtns
+ 0001:00001890       Enable
+ 0001:0000189D       Post
+ 0001:000018AE       Send
+ 0001:000018BF       DlgSend
+ 0001:000018D0       wintxt
+ 0001:000018DD       winid
+ 0001:000018EA       sysinfo
+ 0001:00002DC6       main
+ 0001:0000391B       StartObjectThread
+ 0001:00003978       _callback_opt_sys
+ 0001:00003984       free
+ 0001:0000398C       malloc
+ 0001:000039A0       _fpninit
+ 0001:000039A4       _fpreset
+ 0001:000039B4       memchr
+ 0001:000039C8       memcmp
+ 0001:000039E0       memcpy
+ 0001:00003A00       memset
+ 0001:00003A2C       _ucreate
+ 0001:00003B8C       _uaddmem
+ 0001:00003CEC       _rmem_term
+ 0001:00003D10       _rmem_init
+ 0001:00004224       _ufree
+ 0001:000051A8       _umalloc
+ 0001:0000552C       __sctordtorInit
+ 0001:00005534       __sctordtorTerm
+ 0001:0000553C       _setuparg
+ 0001:00005724       strcat
+ 0001:00005758       strcpy
+ 0001:00005784       strlen
+ 0001:00005798       strrchr
+ 0001:000057B8       _terminate
+ 0001:000057C4       __wctordtorInit
+ 0001:000057C8       __wctordtorTerm
+ 0001:000057CC       _w_uheap_verify
+ 0001:000057D4       _w_walking
+ 0001:000057D8       _cppinit
+ 0001:000057E0       _exestart
+ 0004:00000000       _default_heap
+ 0004:00000028       _argc
+ 0004:0000002C       _argv
+ 0004:00000034       _reg_heap
+ 0004:00000038       _walk_used
+
+Program entry point at 0001:000057E0
